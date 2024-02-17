@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+// import axios from "axios";
 
 export default function CreateAccountModal({ visible, onClose }) {
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [fname, setFname] = useState('');
+  const [lname, setLname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleOnClose = (e) => {
-    if (e.target.id === "container") onClose();
+    if (e.target.id === 'container') onClose();
   };
 
   if (!visible) return null;
