@@ -1,6 +1,6 @@
-import { Datatypes, Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import util from "util";
-import { db } from "../config/db";
+import { db } from "../config/db.js";
 
 export default class User extends Model {
   [util.inspect.custom]() {
@@ -11,24 +11,24 @@ export default class User extends Model {
 User.init(
   {
     userId: {
-      type: Datatypes.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     fname: {
-      type: Datatypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     lname: {
-      type: Datatypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     email: {
-      type: Datatypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     password: {
-      type: Datatypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

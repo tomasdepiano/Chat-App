@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { User } from "../models/index.js";
+import User from "../models/User.model.js";
 
-import { loginRequired } from "../middlewares/auth.middleware.js";
+// import { loginRequired } from "../middlewares/auth.middleware.js";
 
 const authRoutes = Router();
 
-authRoutes.post('/api/auth', async (req, res) => {
+authRoutes.post("/api/auth", async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ where: { email: email } });
 
@@ -19,7 +19,7 @@ authRoutes.post('/api/auth', async (req, res) => {
 
 // Note the `loginRequired` argument passed to the routes below!
 
-authRoutes.post('/api/logout', loginRequired, (req, res) => {
+authRoutes.post("/api/logout", (req, res) => {
   req.session.destroy();
   res.json({ success: true });
 });
