@@ -28,7 +28,7 @@ export default function LoginPage() {
             name="password"
           />
           <button
-            className="border-2 border-red-400 rounded p-2 mt-4"
+            className="border-2 border-red-400 rounded p-2 mt-4 bg-white"
             type="submit"
           >
             Sign In
@@ -36,7 +36,7 @@ export default function LoginPage() {
         </form>
         <button
           onClick={() => setShowModal(true)}
-          className="border-2 border-red-400 rounded p-2 m-2"
+          className="border-2 border-red-400 rounded p-2 m-2 bg-white"
         >
           Create An Account
         </button>
