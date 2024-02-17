@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import LoginPage from "../pages/LoginPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
 
 const router = createBrowserRouter([{ path: "/", element: <LoginPage /> }]);
 
