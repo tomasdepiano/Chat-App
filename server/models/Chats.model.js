@@ -1,6 +1,6 @@
-import { Datatypes, Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import util from "util";
-import { db } from "../config/db";
+import { db } from "../config/db.js";
 
 export default class Chats extends Model {
   [util.inspect.custom]() {
@@ -11,16 +11,16 @@ export default class Chats extends Model {
 Chats.init(
   {
     chatId: {
-      type: Datatypes.INTEGER,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
     firstUser: {
-      type: Datatypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     secondUser: {
-      type: Datatypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },
