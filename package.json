@@ -7,7 +7,9 @@
     "dev": "nodemon server/app.js -w server/app.js -w src",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "seed": "node scripts/seed.js",
+    "initdb": "dropdb --if-exists table && createdb table"
   },
   "dependencies": {
     "axios": "^1.6.7",
