@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import ChangeUserName from '../modals/ChangeUserName';
+import ChangeUserName from "../modals/ChangeUserName";
 
 function SettingsPage() {
   const [changeUserName, setChangeUserName] = useState(false);

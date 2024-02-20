@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 // import axios from "axios";
 
 export default function CreateAccountModal({ visible, onClose }) {
-  const [fname, setFname] = useState('');
-  const [lname, setLname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleOnClose = (e) => {
-    if (e.target.id === 'container') onClose();
+    if (e.target.id === "container") onClose();
   };
 
   if (!visible) return null;
@@ -19,7 +19,7 @@ export default function CreateAccountModal({ visible, onClose }) {
       onClick={handleOnClose}
       className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center"
     >
-      <div className="bg-white py-16 px-16 rounded flex flex-col">
+      <div className="bg-blue-400 py-16 px-16 rounded flex flex-col">
         <h1 className="flex justify-center">Create a New Account!</h1>
         <form className="flex flex-col items-center mt-4">
           <div>
