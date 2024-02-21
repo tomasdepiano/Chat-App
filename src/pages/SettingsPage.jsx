@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import ChangeUserName from '../modals/ChangeUserName';
-import ChangeUserName from '../modals/ChangeUserName';
+
 import ChangePassWord from '../modals/ChangePassword';
 import ChangeEmail from '../modals/ChangeEmail';
 
