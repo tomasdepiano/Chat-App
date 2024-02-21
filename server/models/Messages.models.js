@@ -21,6 +21,9 @@ Messages.init(
     chatId: {
       type: DataTypes.INTEGER,
     },
+    message: {
+      type: DataTypes.STRING,
+    },
   },
   {
     modelName: "messages",

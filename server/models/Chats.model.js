@@ -16,12 +16,12 @@ Chats.init(
       primaryKey: true,
     },
     firstUser: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     secondUser: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
   },
   {
