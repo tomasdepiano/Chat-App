@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import useOpenCloseModal from '../hooks/useOpenCloseModal';
 
 import ChangeUserName from '../modals/ChangeUserName';
 import ChangePassWord from '../modals/ChangePassword';
 import ChangeEmail from '../modals/ChangeEmail';
 
 function SettingsPage() {
-  const [changeUserName, setChangeUserName] = useState(false);
-  const [changePassWord, setChangePassWord] = useState(false);
-  const [changeEmail, setChangeEmail] = useState(false);
-  const handleOnClose = () => setChangeUserName(false);
-  // const handleOnClose = () => setChangePassWord(false);
+  const [changeUserName, setChangeUserName, closeUserName] =
+    useOpenCloseModal(false);
+  const [changePassWord, setChangePassWord, closePassword] =
+    useOpenCloseModal(false);
+  const [changeEmail, setChangeEmail, closeEmail] = useOpenCloseModal(false);
+
   return (
     <main className="h-screen w-screen bg-blue-400 ">
       <h1 className="text-xl font-bold text-center p-2">Settings</h1>
@@ -62,9 +64,9 @@ function SettingsPage() {
           </button>
         </article>
       </section>
-      <ChangeUserName onClose={handleOnClose} visible={changeUserName} />
-      <ChangePassWord onClose={handleOnClose} visible={changePassWord} />
-      <ChangeEmail onClose={handleOnClose} visible={changeEmail} />
+      <ChangeUserName onClose={closeUserName} visible={changeUserName} />
+      <ChangePassWord onClose={closePassword} visible={changePassWord} />
+      <ChangeEmail onClose={closeEmail} visible={changeEmail} />
     </main>
   );
 }
