@@ -1,11 +1,11 @@
 import { Router } from "express";
-import User from "../models/User.model.js";
+import User from "../models/index.js";
 
 // import { loginRequired } from "../middlewares/auth.middleware.js";
 
 const authRoutes = Router();
 
-authRoutes.post("/api/auth", async (req, res) => {
+authRoutes.post("/auth", async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ where: { email: email } });
 
