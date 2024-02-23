@@ -1,6 +1,6 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function WelcomePage() {
   const user = useSelector((state) => state.user);
@@ -8,7 +8,10 @@ export default function WelcomePage() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    navigate('/');
+    navigate("/");
+  };
+  const SettingsPage = () => {
+    navigate("/Settings");
   };
 
   return (
