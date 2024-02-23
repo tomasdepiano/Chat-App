@@ -30,6 +30,7 @@ function SettingsPage() {
             UserName: <span className="font-bold">{user}</span>
           </p>
           {/* <lable >UserName:</lable>
+          <label className="p-2">UserName:</label>
           <input
             type="text"
             className="border-2 border-red-500 w-22 max-w-xs rounded-md "

@@ -34,9 +34,9 @@ export default function LoginPage() {
   };
   return (
     <main className="bg-blue-400 h-screen justify-center flex flex-col items-center ">
-      <div className="flex flex-col items-center text-6xl font-bold text-white p-5 ">
-        RambleOn
-      </div>
+      <h1 className="flex flex-col items-center text-6xl font-bold text-white p-5">
+        RambleOn - World's Best Chat App
+      </h1>
       <div className="flex flex-col items-center">
         <form className="flex flex-col items-center mt-6 p-10 gap-5">
           <Input
