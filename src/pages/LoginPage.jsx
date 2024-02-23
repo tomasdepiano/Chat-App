@@ -24,12 +24,12 @@ export default function LoginPage() {
     }
   };
   return (
-    <main className="bg-blue-400 h-screen justify-center">
-      <div className="flex flex-col items-center text-3xl font-bold text-white p-5">
-        Chat App
+    <main className="bg-blue-400 h-screen justify-center flex flex-col items-center ">
+      <div className="flex flex-col items-center text-6xl font-bold text-white p-5 ">
+        RambleOn
       </div>
       <div className="flex flex-col items-center">
-        <form className="flex flex-col items-center mt-6 p-10">
+        <form className="flex flex-col items-center mt-6 p-10 gap-5">
           <Input
             value={username}
             label="Username:"
@@ -64,7 +64,7 @@ export default function LoginPage() {
           <button
             onClick={(e) => handleLogin(e)}
             className="border-2 border-red-400 rounded-lg p-2 mt-4 bg-gray-100
-            hover:bg-gray-400"
+            hover:bg-gray-400 text-xl"
             type="submit"
           >
             Sign In
@@ -76,7 +76,7 @@ export default function LoginPage() {
           }}
           className="border-2 border-red-400 rounded-lg p-2 m-2
           bg-gray-100
-          hover:bg-gray-400  "
+          hover:bg-gray-400 text-xl  "
         >
           Create An Account
         </button>
