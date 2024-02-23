@@ -1,53 +1,68 @@
-import React, { useState } from 'react';
-import CreateAccountModal from '../modals/CreateAccountModal';
-import useOpenCloseModal from '../hooks/useOpenCloseModal';
-import { useNavigate } from 'react-router-dom';
-//TALK TO MOUNIKA ABOUT ADDING A NOTIFICATION FEATURE ON APP
+import React, { useState } from "react";
+import CreateAccountModal from "../modals/CreateAccountModal";
+import useOpenCloseModal from "../hooks/useOpenCloseModal";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Input } from "../components/Input";
 
 export default function LoginPage() {
   const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await axios.post('/auth', {
-      userName,
+    const res = await axios.post("/api/auth", {
+      username,
       password,
     });
     if (res.data.success) {
-      navigate('/welcome');
+      navigate("/welcome");
     } else {
-      alert('UserName or password is not correct. Try again please.');
+      alert("Username or password is not correct. Try again please.");
     }
   };
   return (
     <main className="bg-blue-400 h-screen justify-center">
-      <div className="flex flex-col items-center text-3xl font-bold ">
+      <div className="flex flex-col items-center text-3xl font-bold text-white p-5">
         Chat App
       </div>
       <div className="flex flex-col items-center">
-        <form className="flex flex-col items-center w-full mt-6 p-10">
-          <label className="p-2">Username:</label>
+        <form className="flex flex-col items-center mt-6 p-10">
+          <Input
+            value={username}
+            label="Username:"
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Type here"
+          />
+          {/* <label className="p-2">Username:</label>
           <input
             placeholder="Type here"
             className=" border-2 border-red-400 w-full rounded-md max-w-xs p-2"
             type="text"
             name="userName"
-            onChange={(e) => setUserName(e.target.value)}
-            value={userName}
-          />
-          <label className="p-2">Password:</label>
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+          /> */}
+          {/* <label className="p-2">Password:</label>
           <input
             placeholder="Type here"
-            className="border-2  border-red-400 w-full rounded-md max-w-xs p-2"
+            className="border-2  border-red-400 w-full rounded-md max-w-xs p-2  text-white"
             type="password"
             name="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+          /> */}
+          <Input
+            value={password}
+            label="Password:"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Type here"
           />
           <button
+            onClick={(e) => handleLogin(e)}
             className="border-2 border-red-400 rounded-lg p-2 mt-4 bg-gray-100
             hover:bg-gray-400"
             type="submit"
@@ -56,7 +71,9 @@ export default function LoginPage() {
           </button>
         </form>
         <button
-          onClick={() => setShowModal(true)}
+          onClick={() => {
+            setShowModal(true);
+          }}
           className="border-2 border-red-400 rounded-lg p-2 m-2
           bg-gray-100
           hover:bg-gray-400  "
