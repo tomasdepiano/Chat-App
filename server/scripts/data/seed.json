@@ -5,5 +5,12 @@
     "email": "test@test.com",
     "username": "tdepiano",
     "password": "test"
+  },
+  {
+    "fname": "Mounika",
+    "lname": "Krishna",
+    "email": "test1@test.com",
+    "username": "Mouni",
+    "password": "test1"
   }
 ]
