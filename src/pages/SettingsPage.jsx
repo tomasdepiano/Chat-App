@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import useOpenCloseModal from '../hooks/useOpenCloseModal';
-
-import ChangeUserName from '../modals/ChangeUserName';
-import ChangePassWord from '../modals/ChangePassword';
-import ChangeEmail from '../modals/ChangeEmail';
+import React, { useState } from "react";
+import useOpenCloseModal from "../hooks/useOpenCloseModal";
+import ChangeUserName from "../modals/ChangeUserName";
+import ChangePassWord from "../modals/ChangePassword";
+import ChangeEmail from "../modals/ChangeEmail";
 
 function SettingsPage() {
   const [changeUserName, setChangeUserName, closeUserName] =
@@ -17,7 +16,7 @@ function SettingsPage() {
       <h1 className="text-xl font-bold text-center p-2">Settings</h1>
       <section className="flex flex-col items-center w-full mt-8 justify-evenly">
         <article className="flex">
-          <lable className="p-2">UserName:</lable>
+          <label className="p-2">UserName:</label>
           <input
             type="text"
             className="border-2 border-red-500 w-22 max-w-xs rounded-md "
