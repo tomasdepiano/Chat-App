@@ -3,7 +3,7 @@ import { User } from "../models/index.js";
 
 const createAcountRoutes = Router();
 
-createAcountRoutes.post('/createAccount', async (req, res) => {
+createAcountRoutes.post("/createAccount", async (req, res) => {
   const { fname, lname, email, username, password } = req.body;
 
   console.log(req.body);
@@ -20,10 +20,11 @@ createAcountRoutes.post('/createAccount', async (req, res) => {
       password: password,
     });
 
-
     res.json({
       success: true,
       message: "Your account has been created, go back and login.",
     });
   }
 });
+
+export default createAcountRoutes;

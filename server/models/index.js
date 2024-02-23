@@ -7,4 +7,5 @@ Messages.belongsTo(Chats, { foreignKey: "chatId" });
 Messages.belongsTo(User, { foreignKey: "userId" });
 Chats.hasMany(Messages, { foreignKey: "chatId" });
 
-export default { User, Messages, Chats };
+//export default can't contain mutiple things in object
+export { User, Messages, Chats };
