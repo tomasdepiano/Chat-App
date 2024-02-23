@@ -1,17 +1,17 @@
 import { Router } from "express";
-import User from "../models/index.js";
+import { User } from "../models/index.js";
 
 // import { loginRequired } from "../middlewares/auth.middleware.js";
 
 const authRoutes = Router();
 
 authRoutes.post("/auth", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ where: { email: email } });
+  const { username, password } = req.body;
+  const user = await User.findOne({ where: { username: username } });
 
   if (user && user.password === password) {
     req.session.userId = user.userId;
-    res.json({ success: true });
+    res.json({ success: true, userId: req.session.userId });
   } else {
     res.json({ success: false });
   }
