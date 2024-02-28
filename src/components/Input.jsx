@@ -1,25 +1,37 @@
-import React from 'react';
+import React from "react";
 
-export const Input = ({ label, value, onChange, placeholder }) => {
+export default function Input({
+  label,
+  value,
+  onChange,
+  placeholder,
+  className,
+}) {
   return (
-    <div className="flex items-center w-96">
-      <label className="p-2 text-white text-xl w-2/5">{label}</label>
+    <div className={`flex items-center w-96 ${className}`}>
+      {label && <label className="p-2 text-white text-xl w-2/5">{label}</label>}
       <input
-        className="border-2 border-red-400 w-full rounded-md max-w-xs p-2 "
+        className={`border-2 border-red-400 w-full rounded-md p-2 `}
         onChange={onChange}
         value={value}
         placeholder={placeholder}
       />
     </div>
   );
-};
+}
 
-export const ModalInputs = ({ label, value, onChange, placeholder }) => {
+export const ModalInputs = ({
+  label,
+  value,
+  onChange,
+  placeholder,
+  className,
+}) => {
   return (
     <div className="flex items-center w-96">
       <label className="p-2 text-white text-xl w-1/3">{label}</label>
       <input
-        className="ml-2 p-2 border-2 border-red-400 rounded"
+        className={`ml-2 p-2 border-2 border-red-400 rounded ${className}`}
         onChange={onChange}
         value={value}
         placeholder={placeholder}
