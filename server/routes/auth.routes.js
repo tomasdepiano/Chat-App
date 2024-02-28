@@ -11,7 +11,12 @@ authRoutes.post("/auth", async (req, res) => {
 
   if (user && user.password === password) {
     req.session.userId = user.userId;
-    res.json({ success: true, userId: req.session.userId, email: user.email, username: user.username });
+    res.json({
+      success: true,
+      userId: req.session.userId,
+      email: user.email,
+      username: user.username,
+    });
   } else {
     res.json({ success: false });
   }
