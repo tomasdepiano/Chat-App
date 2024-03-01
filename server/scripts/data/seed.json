@@ -12,5 +12,26 @@
     "email": "test1@test.com",
     "username": "Mouni",
     "password": "test1"
+  },
+  {
+    "fname": "Ann",
+    "lname": "A",
+    "email": "test2@test.com",
+    "username": "Ann",
+    "password": "Ann@1"
+  },
+  {
+    "fname": "Jhon",
+    "lname": "oldman",
+    "email": "test3@test.com",
+    "username": "Jhon",
+    "password": "Jhon@1"
+  },
+  {
+    "fname": "Jason",
+    "lname": "tom",
+    "email": "test4@test.com",
+    "username": "Jason",
+    "password": "Jason@3"
   }
 ]
