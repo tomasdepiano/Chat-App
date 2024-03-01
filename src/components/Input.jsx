@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Input({
   label,
@@ -6,6 +6,7 @@ export default function Input({
   onChange,
   placeholder,
   className,
+  type,
 }) {
   return (
     <div className={`flex items-center w-96 ${className}`}>
@@ -15,6 +16,7 @@ export default function Input({
         onChange={onChange}
         value={value}
         placeholder={placeholder}
+        type={type}
       />
     </div>
   );

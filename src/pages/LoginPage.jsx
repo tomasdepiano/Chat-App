@@ -1,35 +1,36 @@
-import React, { useState } from "react";
-import CreateAccountModal from "../modals/CreateAccountModal";
-import useOpenCloseModal from "../hooks/useOpenCloseModal";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import Input from "../components/Input";
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import CreateAccountModal from '../modals/CreateAccountModal';
+import useOpenCloseModal from '../hooks/useOpenCloseModal';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Input from '../components/Input';
+import { useDispatch } from 'react-redux';
 // import { response } from 'express';
 
 export default function LoginPage() {
   const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await axios.post("/api/auth", {
+    const res = await axios.post('/api/auth', {
       username,
       password,
     });
 
     console.log(res);
     if (res.data.success) {
+      console.log(res.data);
       dispatch({
-        type: "USER_LOG_IN",
+        type: 'USER_LOG_IN',
         payload: { username: res.data.username, email: res.data.email },
       });
-      navigate("/welcome");
+      navigate('/welcome');
     } else {
-      alert("Username or password is not correct. Try again please.");
+      alert('Username or password is not correct. Try again please.');
     }
   };
   return (
