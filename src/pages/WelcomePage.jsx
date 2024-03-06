@@ -9,7 +9,7 @@ import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 import CallImage from "../components/CallImage.jsx";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:5044", {
+const socket = io("http://localhost:3000", {
   transports: ["websocket"],
 });
 

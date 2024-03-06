@@ -9,6 +9,9 @@ import cors from "cors";
 
 const app = express();
 
+const ioServer = createServer(app);
+const io = new Server(ioServer);
+
 const port = "5044";
 ViteExpress.config({ printViterDevServerHost: true });
 app.use(morgan("dev"));
@@ -18,9 +21,6 @@ app.use(
   session({ secret: "ssshhhhh", saveUninitialized: true, resave: false })
 );
 app.use(cors());
-const server = createServer(app);
-
-const io = new Server(server);
 
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
@@ -32,6 +32,10 @@ io.on("connection", (socket) => {
 
 app.use(router);
 
+ioServer.listen(3000, () => {
+  console.log("listening on *:3000");
+});
+
 ViteExpress.listen(app, port, () =>
-  console.log(`Server is listening on http://localhost:${port}`)
+  console.log("Server is listening on " + port)
 );
