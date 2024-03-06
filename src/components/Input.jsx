@@ -9,11 +9,9 @@ export default function Input({
   type,
 }) {
   return (
-    <div
-      className={`lg:flex lg:items-center lg:w-96 sm:flex sm:flex-none ${className}`}
-    >
+    <div className={`lg:flex lg:items-center lg:w-96    ${className}`}>
       {label && (
-        <label className="lg:p-2 text-white lg:text-xl lg:w-2/5 sm:9-2 sm:text-2xl  ">
+        <label className="lg:p-2 text-white lg:text-2xl lg:w-2/5 sm:p-2 sm:text-xl xs:text-lg xxs:text-lg inline-block w-full xs:text-center xxs:text-center">
           {label}
         </label>
       )}

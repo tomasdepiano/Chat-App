@@ -35,11 +35,11 @@ export default function LoginPage() {
   };
   return (
     <main className="bg-blue-400 h-screen justify-center flex flex-col items-center ">
-      <h1 className="flex flex-col items-center lg:text-6xl font-bold text-white p-5 sm:text-3xl sm:font-bold md:text-4xl xs:text-5xl">
+      <h1 className="flex flex-col items-center lg:text-6xl font-bold text-white p-5 sm:text-4xl sm:font-bold md:text-4xl xs:text-2xl xxs:text-xl">
         RambleOn - World's Best Chat App
       </h1>
       <div className="flex flex-col items-center">
-        <form className="flex flex-col items-center mt-6 p-10 gap-5 ">
+        <form className="flex flex-col items-center mt-6 p-10 gap-5">
           <Input
             value={username}
             label="Username:"
