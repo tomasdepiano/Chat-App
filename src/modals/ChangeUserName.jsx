@@ -11,7 +11,7 @@ function ChangeUserName({ visible, onClose }) {
       onClick={handleOnClose}
       className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center"
     >
-      <div className="bg-white p-2 rounded py-16 px-16 flex flex-col">
+      <div className="bg-white p-2 rounded py-16 px-16 flex flex-col xs:py-6 xs:px-6">
         <form>
           <div>
             <label className="mr-1">Current UserName:</label>

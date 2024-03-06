@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function Input({
   label,
@@ -9,8 +9,12 @@ export default function Input({
   type,
 }) {
   return (
-    <div className={`flex items-center w-96 ${className}`}>
-      {label && <label className="p-2 text-white text-xl w-2/5">{label}</label>}
+    <div className={`lg:flex lg:items-center lg:w-96    ${className}`}>
+      {label && (
+        <label className="lg:p-2 text-white lg:text-2xl lg:w-2/5 sm:p-2 sm:text-xl xs:text-lg xxs:text-lg inline-block w-full xs:text-center xxs:text-center">
+          {label}
+        </label>
+      )}
       <input
         className={`border-2 border-red-400 w-full rounded-md p-2 `}
         onChange={onChange}

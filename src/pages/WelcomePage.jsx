@@ -43,7 +43,7 @@ export default function WelcomePage() {
   };
 
   return (
-    <main className="bg-blue-400 h-screen flex flex-row justify-center ">
+    <main className="bg-blue-400 h-screen flex flex-row justify-center md:w-[120] lg:w-[480]">
       {/* division for user details & messages */}
       <div className=" mt-10 ml-2 text-white text-lg w-1/3">
         Hello, <span className="font-bold text-2xl text-red-700">{user} !</span>
