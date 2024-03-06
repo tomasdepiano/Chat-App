@@ -1,22 +1,22 @@
-import { Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import LoginPage from './pages/LoginPage.jsx';
-import SettingsPage from './pages/SettingsPage.jsx';
-import WelcomePage from './pages/WelcomePage.jsx';
-import ParticlesBackground from './components/ParticlesBackground.jsx';
+import { Route, createBrowserRouter, RouterProvider } from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import LoginPage from "./pages/LoginPage.jsx";
+import SettingsPage from "./pages/SettingsPage.jsx";
+import WelcomePage from "./pages/WelcomePage.jsx";
+import ParticlesBackground from "./components/ParticlesBackground.jsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <LoginPage />,
   },
   {
-    path: '/settings',
+    path: "/settings",
     element: <SettingsPage />,
   },
   {
-    path: '/welcome',
+    path: "/welcome",
     element: <WelcomePage />,
   },
 ]);
