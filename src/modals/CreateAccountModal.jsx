@@ -36,7 +36,7 @@ export default function CreateAccountModal({ visible, onClose }) {
       onClick={handleOnClose}
       className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center"
     >
-      <div className="bg-blue-400 py-16 px-16 rounded flex flex-col">
+      <div className="bg-blue-400 py-16 px-16 rounded flex flex-col xxs:py-6 xxs:px-0.5">
         <h1 className="flex justify-center text-white text-xl">
           Create a New Account!
         </h1>
