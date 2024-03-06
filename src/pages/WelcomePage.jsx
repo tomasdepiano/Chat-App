@@ -1,23 +1,45 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import Input from '../components/Input.jsx';
-import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
-import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
-import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Input from "../components/Input.jsx";
+import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
+import MapsUgcOutlinedIcon from "@mui/icons-material/MapsUgcOutlined";
+import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 // import Avatar from '../components/Avatar.jsx';
-import CallImage from '../components/CallImage.jsx';
+import CallImage from "../components/CallImage.jsx";
+import io from "socket.io-client";
+
+const socket = io("http://localhost:5044", {
+  transports: ["websocket"],
+});
 
 export default function WelcomePage() {
   const user = useSelector((state) => state.user);
+  const [message, setMessage] = useState("");
+  const [messageReceived, setMessageReceived] = useState("");
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("Connected");
+    });
+    socket.on("receive_message", (data) => {
+      setMessageReceived(data.message);
+    });
+  }, []);
+
+  // const sendMessage = () => {
+  //   socket.emit("send_message", {
+  //     message,
+  //   });
+  // };
+
   const handleLogout = () => {
-    navigate('/');
+    navigate("/");
   };
   const SettingsPage = () => {
-    navigate('/Settings');
+    navigate("/Settings");
   };
 
   return (
@@ -93,11 +115,18 @@ export default function WelcomePage() {
         </div>
         {/* input for message */}
         <div className="fixed bottom-5 w-[50%] flex items-center">
-          <Input className=" w-[95%]  ml-1.5 " placeholder="Type Here" />
+          <Input
+            className=" w-[95%]  ml-1.5 "
+            placeholder="Type Here"
+            onChange={(event) => {
+              setMessage(event.target.value);
+            }}
+          />
           <div className="w-[10%]">
             <button className="w-full">
               <ArrowCircleRightOutlinedIcon fontSize="large" />
             </button>
+            {messageReceived}
           </div>
         </div>
       </div>
