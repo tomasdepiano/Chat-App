@@ -29,4 +29,19 @@ authRoutes.post("/api/logout", (req, res) => {
   res.json({ success: true });
 });
 
+authRoutes.post("/checkUser", async (req, res) => {
+  console.log(req.session.userId);
+  if (req.session.userId) {
+    const user = await User.findByPk(req.session.userId);
+    res.json({
+      success: true,
+      userId: req.session.userId,
+      email: user.email,
+      username: user.username,
+    });
+  } else {
+    res.json({ success: false });
+  }
+});
+
 export default authRoutes;

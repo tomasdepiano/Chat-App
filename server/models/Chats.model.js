@@ -15,11 +15,11 @@ Chats.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    firstUser: {
+    sender: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    secondUser: {
+    receiver: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
