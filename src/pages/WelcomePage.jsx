@@ -28,6 +28,7 @@ export default function WelcomePage() {
       setMessageReceived(data.message);
     });
   }, []);
+  console.log(user);
 
   // const sendMessage = () => {
   //   socket.emit("send_message", {
@@ -43,7 +44,7 @@ export default function WelcomePage() {
   };
 
   return (
-    <main className="bg-blue-400 h-screen flex flex-row justify-center md:w-[120] lg:w-[480]">
+    <main className="bg-blue-400 h-screen flex flex-row justify-center ">
       {/* division for user details & messages */}
       <div className=" mt-10 ml-2 text-white text-lg w-1/3">
         Hello, <span className="font-bold text-2xl text-red-700">{user} !</span>
@@ -114,7 +115,7 @@ export default function WelcomePage() {
           </div>
         </div>
         {/* input for message */}
-        <div className="fixed bottom-5 w-[50%] flex items-center">
+        <div className="fixed bottom-2 w-[25%] flex items-center ">
           <Input
             className=" w-[95%]  ml-1.5 "
             placeholder="Type Here"

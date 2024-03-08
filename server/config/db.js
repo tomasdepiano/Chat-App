@@ -21,4 +21,4 @@ async function connectToDB(dbURI) {
   return sequelize;
 }
 
-export const db = await connectToDB("postgresql:///chats");
+export const db = await connectToDB("postgresql:///ChatApp");

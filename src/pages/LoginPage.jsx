@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Input from "../components/Input";
 import { useDispatch } from "react-redux";
-// import { response } from 'express';
 
 export default function LoginPage() {
   const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
