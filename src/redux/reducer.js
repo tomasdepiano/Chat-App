@@ -21,6 +21,13 @@ export default function reducer(state = initialState, action) {
     //     user: action.payload.username,
     //     email: action.payload.email,
     //   };
+    case "USER_LOG_OUT":
+      return {
+        ...state,
+        logout: true,
+        isLoggedIn: false,
+        user: "",
+      };
     default:
       return state;
   }
