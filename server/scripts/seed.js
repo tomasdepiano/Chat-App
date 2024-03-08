@@ -23,8 +23,8 @@ const usersInDB = await Promise.all(
     });
 
     const newChat = await Chats.create({
-      sender: newUser.userId,
-      receiver: 2,
+      senderId: newUser.userId,
+      receiverId: 2,
     });
 
     const newMessage = await Messages.create({
