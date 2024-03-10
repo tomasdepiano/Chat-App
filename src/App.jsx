@@ -7,7 +7,7 @@ import WelcomePage from "./pages/WelcomePage.jsx";
 import ParticlesBackground from "./components/ParticlesBackground.jsx";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import SettingsButton from "./pages/Responsive/SettingsButton.jsx";
+import SettingsPageResponsive from "./pages/Responsive/SettingsPageResponsive.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/settings2",
-    element: <SettingsButton />,
+    element: <SettingsPageResponsive />,
   },
 ]);
 

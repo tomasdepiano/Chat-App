@@ -9,7 +9,7 @@ import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 import CallImage from "../components/CallImage.jsx";
 import io from "socket.io-client";
 import SettingsIcon from "@mui/icons-material/Settings";
-import SettingsButton from "./Responsive/SettingsButton.jsx";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const socket = io("http://localhost:3000", {
   transports: ["websocket"],
@@ -24,6 +24,10 @@ export default function WelcomePage() {
 
   function SettingsPageResponsive() {
     navigate("/settings2");
+  }
+
+  function ResponsiveLogoutButton() {
+    navigate("/");
   }
 
   useEffect(() => {
@@ -153,6 +157,12 @@ export default function WelcomePage() {
               className="lg:hidden fixed top-12 ml-9 text-black"
             >
               <SettingsIcon fontSize="large" />
+            </button>
+            <button
+              onClick={ResponsiveLogoutButton}
+              className="lg:hidden fixed top-5 left-5 mt-6 ml-8 text-black"
+            >
+              <LogoutIcon fontSize="large" />
             </button>
           </div>
           <button
