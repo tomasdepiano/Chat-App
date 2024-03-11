@@ -8,6 +8,8 @@ import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 // import Avatar from '../components/Avatar.jsx';
 import CallImage from "../components/CallImage.jsx";
 import io from "socket.io-client";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const socket = io("http://localhost:3000", {
   transports: ["websocket"],
@@ -19,6 +21,14 @@ export default function WelcomePage() {
   const [messageReceived, setMessageReceived] = useState("");
 
   const navigate = useNavigate();
+
+  function SettingsPageResponsive() {
+    navigate("/settings2");
+  }
+
+  function ResponsiveLogoutButton() {
+    navigate("/");
+  }
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -46,14 +56,14 @@ export default function WelcomePage() {
   return (
     <main className="bg-blue-400 h-screen flex flex-row justify-center ">
       {/* division for user details & messages */}
-      <div className=" mt-10 ml-2 text-white text-lg w-1/3">
+      <div className=" lg:mt-10 lg:ml-2 lg:text-white lg:text-lg lg:w-1/3 xxs:mt-10 xxs:ml-28 xxs:text-white">
         Hello, <span className="font-bold text-2xl text-red-700">{user} !</span>
         <button className="ml-2" title="New Message">
           <MapsUgcOutlinedIcon fontSize="large" />
         </button>
       </div>
       {/* division for message input and otheruser  */}
-      <div className="bg-white w-2/3 h-screen flex flex-col justify-center items-center ">
+      <div className="bg-white lg:w-2/3 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:items-center md: hidden">
         {/* other user display */}
         <div className=" fixed top-4 w-[48%] h-[80px] bg-gray-100  rounded-full  flex justify-evenly items-center">
           {/* <Avatar className="" /> */}
@@ -132,8 +142,8 @@ export default function WelcomePage() {
         </div>
       </div>
       {/* division for friendsList and buttons(settings&logout)  */}
-      <div className="w-1/4 flex-none">
-        <div className="mt-10 ml-10 text-white text-xl w-[80%] flex justify-between ">
+      <div className="w-1/4 flex-none  ">
+        <div className="lg:mt-10 lg:ml-10 text-white lg:text-xl lg:w-[80%] lg:flex lg:justify-between  xxs:hidden ">
           <p>Friends List</p>
           <button title="Group Chat">
             <GroupAddOutlinedIcon fontSize="large" />
@@ -141,14 +151,28 @@ export default function WelcomePage() {
         </div>
 
         <div className="fixed bottom-10">
+          <div>
+            <button
+              onClick={SettingsPageResponsive}
+              className="lg:hidden fixed top-12 ml-9 text-black"
+            >
+              <SettingsIcon fontSize="large" />
+            </button>
+            <button
+              onClick={ResponsiveLogoutButton}
+              className="lg:hidden fixed top-5 left-5 mt-6 ml-8 text-black"
+            >
+              <LogoutIcon fontSize="large" />
+            </button>
+          </div>
           <button
-            className="mr-10 border-2 border-red-400 rounded-lg p-2 m-2 bg-gray-100 hover:bg-gray-400 text-2xl"
+            className="lg:mr-10 lg:border-2 lg:border-red-400 lg:rounded-lg lg:p-2 lg:m-2 lg:bg-gray-100 lg:hover:bg-gray-400 lg:text-2xl xxs:hidden"
             onClick={handleLogout}
           >
             Logout
           </button>
           <button
-            className="border-2 border-red-400 rounded-lg p-2  bg-gray-100 hover:bg-gray-400 text-xl"
+            className="lg:border-2 lg:border-red-400 lg:rounded-lg lg:p-2  lg:bg-gray-100 lg:hover:bg-gray-400 lg:text-xl xxs:hidden"
             onClick={SettingsPage}
           >
             Go To Settings Page
