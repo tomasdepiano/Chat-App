@@ -9,11 +9,16 @@ import cors from "cors";
 
 const app = express();
 
-const ioServer = createServer(app);
-const io = new Server(ioServer);
+const ioServer = createServer(app); // Creating an HTTP server using the Express app
+const io = new Server(ioServer); //initializing socketIO with the created server 
 
-const port = "5044";
+
+const port = process.env.PORT || "5044"; //defining port number here
+
+
 ViteExpress.config({ printViterDevServerHost: true });
+
+
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -32,10 +37,12 @@ io.on("connection", (socket) => {
 
 app.use(router);
 
-ioServer.listen(3000, () => {
-  console.log("listening on *:3000");
+//using the port variable 5044 by default or environment defined port 
+ioServer.listen(port, () => {
+  console.log(`listening on *:${port}`);
 });
 
-ViteExpress.listen(app, port, () =>
-  console.log("Server is listening on " + port)
+ViteExpress.listen(app, port, () => {
+  console.log(`Vite-Express server is listening on ${port}`)
+}
 );
