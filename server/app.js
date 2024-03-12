@@ -44,5 +44,5 @@ ioServer.listen(port, () => {
 });
 
 ViteExpress.listen(app, 3500, () =>
-  console.log("Server is listening on " + 3500)
+  console.log(`Server is listening on http://localhost:${3500}`)
 );
