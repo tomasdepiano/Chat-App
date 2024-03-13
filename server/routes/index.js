@@ -4,7 +4,7 @@ import authRoutes from "./auth.routes.js";
 import chats from "./createChat.routes.js";
 import createMessageRouter from "./createMessage.routes.js";
 import getMessages from "./getMessages.routes.js";
-import getChats from "./getChat.route.js";
+import getChats from "./getChat.routes.js";
 
 
 const router = Router();
