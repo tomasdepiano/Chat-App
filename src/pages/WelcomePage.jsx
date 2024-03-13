@@ -161,7 +161,7 @@ export default function WelcomePage() {
               <LogoutIcon fontSize="large" />
             </button>
           </div>
-          <Logout className="xs:hidden" />
+          <Logout />
           <Settings />
         </div>
       </div>

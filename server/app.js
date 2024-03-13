@@ -13,7 +13,7 @@ const ioServer = createServer(app);
 const io = new SocketIOServer(ioServer);
 
 const port = "3500";
-const port2 = '5044';
+const VitePort = "3501";
 ViteExpress.config({ printViterDevServerHost: true });
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
@@ -42,6 +42,6 @@ ioServer.listen(port2, () => {
   console.log(`listening on *:${port2}`);
 });
 
-ViteExpress.listen(app, (port) =>
-  console.log(`Server is listening on http://localhost:${port}`)
+ViteExpress.listen(app, VitePort, () =>
+  console.log(`Server is listening on http://localhost:${VitePort}`)
 );
