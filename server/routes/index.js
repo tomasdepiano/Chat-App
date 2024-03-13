@@ -16,7 +16,7 @@ const router = Router();
 router.use("/api", createAcountRoutes);
 router.use("/api", authRoutes);
 router.use('/api', chats);
-<<<<<<<< < Temporary merge branch 1
+
 router.use('/api', createMessageRouter)
 
 
