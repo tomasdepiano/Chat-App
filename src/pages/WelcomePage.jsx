@@ -15,10 +15,6 @@ import Settings from '../components/Settings.jsx';
 
 const socket = io('http://localhost:3500', {
   transports: ['websocket'],
-
-const socket = io("http://localhost:3500", {
-  transports: ["websocket"],
-
 });
 
 export default function WelcomePage() {
