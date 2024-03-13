@@ -10,15 +10,10 @@ import cors from "cors";
 const app = express();
 
 const ioServer = createServer(app);
-const io = new SocketIOServer(ioServer, {
-  cors: {
-    origin: "*", // the * means allowing access anywhere need to change this to local port
-    methods: ["GET", "POST"],
-  },
-});
+const io = new SocketIOServer(ioServer);
 
-const port = process.env.PORT || "5044";
-// ViteExpress.config({ printViterDevServerHost: true });
+const port = "5044";
+ViteExpress.config({ printViterDevServerHost: true });
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -49,5 +44,5 @@ ioServer.listen(port, () => {
 });
 
 ViteExpress.listen(app, 3500, () =>
-  console.log("Server is listening on " + 3500)
+  console.log(`Server is listening on http://localhost:${3500}`)
 );
