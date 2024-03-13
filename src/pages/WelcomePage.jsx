@@ -15,6 +15,10 @@ import Settings from '../components/Settings.jsx';
 
 const socket = io('http://localhost:3500', {
   transports: ['websocket'],
+
+const socket = io("http://localhost:3500", {
+  transports: ["websocket"],
+
 });
 
 export default function WelcomePage() {
@@ -150,13 +154,13 @@ export default function WelcomePage() {
           <div>
             <button
               onClick={SettingsPageResponsive}
-              className="lg:hidden fixed top-12 ml-9 text-black"
+              className="lg:hidden fixed top-12 ml-16 text-white"
             >
               <SettingsIcon fontSize="large" />
             </button>
             <button
               onClick={ResponsiveLogoutButton}
-              className="lg:hidden fixed top-5 left-5 mt-6 ml-8 text-black"
+              className="lg:hidden fixed top-5 left-7 mt-6 ml-8 text-white"
             >
               <LogoutIcon fontSize="large" />
             </button>
