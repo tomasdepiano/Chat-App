@@ -10,6 +10,8 @@ import CallImage from '../components/CallImage.jsx';
 import io from 'socket.io-client';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import Logout from '../components/Logout.jsx';
+import Settings from '../components/Settings.jsx';
 
 const socket = io('http://localhost:3500', {
   transports: ['websocket'],
@@ -45,13 +47,6 @@ export default function WelcomePage() {
   //     message,
   //   });
   // };
-
-  const handleLogout = () => {
-    navigate('/');
-  };
-  const SettingsPage = () => {
-    navigate('/Settings');
-  };
 
   return (
     <main className="bg-blue-400 h-screen flex flex-row justify-center ">
@@ -151,6 +146,7 @@ export default function WelcomePage() {
         </div>
 
         <div className="fixed bottom-10">
+          {/* responsivepage icons for settings&logout */}
           <div>
             <button
               onClick={SettingsPageResponsive}
@@ -165,18 +161,8 @@ export default function WelcomePage() {
               <LogoutIcon fontSize="large" />
             </button>
           </div>
-          <button
-            className="lg:mr-10 lg:border-2 lg:border-red-400 lg:rounded-lg lg:p-2 lg:m-2 lg:bg-gray-100 lg:hover:bg-gray-400 lg:text-2xl xxs:hidden"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
-          <button
-            className="lg:border-2 lg:border-red-400 lg:rounded-lg lg:p-2  lg:bg-gray-100 lg:hover:bg-gray-400 lg:text-xl xxs:hidden"
-            onClick={SettingsPage}
-          >
-            Go To Settings Page
-          </button>
+          <Logout className="xs:hidden" />
+          <Settings />
         </div>
       </div>
     </main>
