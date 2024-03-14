@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Input from '../components/Input.jsx';
@@ -12,6 +12,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Logout from '../components/Logout.jsx';
 import Settings from '../components/Settings.jsx';
+// import axios from 'axios';
 
 const socket = io('http://localhost:3500', {
   transports: ['websocket'],
@@ -48,6 +49,8 @@ export default function WelcomePage() {
   //   });
   // };
 
+  useEffect(() => {}, []);
+
   return (
     <main className="bg-blue-400 h-screen flex flex-row justify-center ">
       {/* division for user details & messages */}
@@ -81,30 +84,6 @@ export default function WelcomePage() {
         {/* messages showUp */}
         <div className=" h-[80%] mt-8 w-full  border-b overflow-y-auto">
           <div className="p-14">
-            <div className="  max-w-[40%] bg-orange-400 rounded-b-2xl rounded-tr-xl p-4 mb-6 text-white">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente
-              totam voluptatem eos eius quidem est temporibus maxime maiores,
-              laudantium eligendi ut obcaecati dolorem quo sit fuga excepturi
-              itaque fugiat ipsam?
-            </div>
-            <div className=" max-w-[40%] bg-blue-400 rounded-b-2xl rounded-tl-xl p-4 text-white ml-auto ">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Perspiciatis quisquam nesciunt laudantium voluptas, recusandae
-              repellendus sequi, voluptatum suscipit dolor sapiente non quod
-              iste veritatis voluptates! Architecto non sed debitis mollitia.
-            </div>
-            <div className="  max-w-[40%] bg-orange-400 rounded-b-2xl rounded-tr-xl p-4 mb-6 text-white">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente
-              totam voluptatem eos eius quidem est temporibus maxime maiores,
-              laudantium eligendi ut obcaecati dolorem quo sit fuga excepturi
-              itaque fugiat ipsam?
-            </div>
-            <div className=" max-w-[40%] bg-blue-400 rounded-b-2xl rounded-tl-xl p-4 text-white ml-auto ">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Perspiciatis quisquam nesciunt laudantium voluptas, recusandae
-              repellendus sequi, voluptatum suscipit dolor sapiente non quod
-              iste veritatis voluptates! Architecto non sed debitis mollitia.
-            </div>
             <div className="  max-w-[40%] bg-orange-400 rounded-b-2xl rounded-tr-xl p-4 mb-6 text-white">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente
               totam voluptatem eos eius quidem est temporibus maxime maiores,
