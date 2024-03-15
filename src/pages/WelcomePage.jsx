@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Input from '../components/Input.jsx';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
-import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
+
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 // import Avatar from '../components/Avatar.jsx';
 
-import CallImage from "../components/CallImage.jsx";
-import io from "socket.io-client";
-import SettingsIcon from "@mui/icons-material/Settings";
-import LogoutIcon from "@mui/icons-material/Logout";
-import Logout from "../components/Logout.jsx";
-import Settings from "../components/Settings.jsx";
-import NewMessageModal from "../modals/NewMessageModal.jsx";
-import useOpenCloseModal from "../hooks/useOpenCloseModal";
-
-
+import CallImage from '../components/CallImage.jsx';
+import io from 'socket.io-client';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Logout from '../components/Logout.jsx';
+import Settings from '../components/Settings.jsx';
+import NewMessageModal from '../modals/NewMessageModal.jsx';
+import useOpenCloseModal from '../hooks/useOpenCloseModal';
 
 const socket = io('http://localhost:3500', {
   transports: ['websocket'],
@@ -26,7 +24,6 @@ export default function WelcomePage() {
   const user = useSelector((state) => state.user);
 
   const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
-
 
   const navigate = useNavigate();
 
@@ -54,9 +51,12 @@ export default function WelcomePage() {
   //   });
   // };
 
+  useEffect(() => {}, []);
+
   return (
     <main className="bg-blue-400 h-screen flex flex-row justify-center ">
       {/* division for user details & messages */}
+      <Chats />
       <div className=" lg:mt-10 lg:ml-2 lg:text-white lg:text-lg lg:w-1/3 xxs:mt-10 xxs:ml-28 xxs:text-white">
         Hello, <span className="font-bold text-2xl text-red-700">{user} !</span>
         <button
@@ -106,30 +106,6 @@ export default function WelcomePage() {
               repellendus sequi, voluptatum suscipit dolor sapiente non quod
               iste veritatis voluptates! Architecto non sed debitis mollitia.
             </div>
-            <div className="  max-w-[40%] bg-orange-400 rounded-b-2xl rounded-tr-xl p-4 mb-6 text-white">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente
-              totam voluptatem eos eius quidem est temporibus maxime maiores,
-              laudantium eligendi ut obcaecati dolorem quo sit fuga excepturi
-              itaque fugiat ipsam?
-            </div>
-            <div className=" max-w-[40%] bg-blue-400 rounded-b-2xl rounded-tl-xl p-4 text-white ml-auto ">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Perspiciatis quisquam nesciunt laudantium voluptas, recusandae
-              repellendus sequi, voluptatum suscipit dolor sapiente non quod
-              iste veritatis voluptates! Architecto non sed debitis mollitia.
-            </div>
-            <div className="  max-w-[40%] bg-orange-400 rounded-b-2xl rounded-tr-xl p-4 mb-6 text-white">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente
-              totam voluptatem eos eius quidem est temporibus maxime maiores,
-              laudantium eligendi ut obcaecati dolorem quo sit fuga excepturi
-              itaque fugiat ipsam?
-            </div>
-            <div className=" max-w-[40%] bg-blue-400 rounded-b-2xl rounded-tl-xl p-4 text-white ml-auto ">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Perspiciatis quisquam nesciunt laudantium voluptas, recusandae
-              repellendus sequi, voluptatum suscipit dolor sapiente non quod
-              iste veritatis voluptates! Architecto non sed debitis mollitia.
-            </div>
           </div>
         </div>
         {/* input for message */}
@@ -145,7 +121,7 @@ export default function WelcomePage() {
       {/* division for friendsList and buttons(settings&logout)  */}
       <div className="w-1/4 flex-none  ">
         <div className="lg:mt-10 lg:ml-10 text-white lg:text-xl lg:w-[80%] lg:flex lg:justify-between  xxs:hidden ">
-          <p>Friends List</p>{" "}
+          <p>Friends List</p>{' '}
           <div className="border-2 border-red-400 rounded-lg hover:bg-gray-400 text-black bg-gray-100">
             <button>Add Friend</button>
           </div>
