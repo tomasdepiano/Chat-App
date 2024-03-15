@@ -1,40 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Input from "../components/Input.jsx";
-import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
-import MapsUgcOutlinedIcon from "@mui/icons-material/MapsUgcOutlined";
-import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Input from '../components/Input.jsx';
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
+import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 // import Avatar from '../components/Avatar.jsx';
-import CallImage from "../components/CallImage.jsx";
-import io from "socket.io-client";
-import SettingsIcon from "@mui/icons-material/Settings";
-import LogoutIcon from "@mui/icons-material/Logout";
+import CallImage from '../components/CallImage.jsx';
+import io from 'socket.io-client';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Logout from '../components/Logout.jsx';
+import Settings from '../components/Settings.jsx';
 
-const socket = io("http://localhost:3000", {
-  transports: ["websocket"],
+const socket = io('http://localhost:3500', {
+  transports: ['websocket'],
 });
 
 export default function WelcomePage() {
   const user = useSelector((state) => state.user);
-  const [message, setMessage] = useState("");
-  const [messageReceived, setMessageReceived] = useState("");
+  const [message, setMessage] = useState('');
+  const [messageReceived, setMessageReceived] = useState('');
 
   const navigate = useNavigate();
 
   function SettingsPageResponsive() {
-    navigate("/settings2");
+    navigate('/settings2');
   }
 
   function ResponsiveLogoutButton() {
-    navigate("/");
+    navigate('/');
   }
 
   useEffect(() => {
-    socket.on("connect", () => {
-      console.log("Connected");
+    socket.on('connect', () => {
+      console.log('Connected');
     });
-    socket.on("receive_message", (data) => {
+    socket.on('receive_message', (data) => {
       setMessageReceived(data.message);
     });
   }, []);
@@ -45,13 +47,6 @@ export default function WelcomePage() {
   //     message,
   //   });
   // };
-
-  const handleLogout = () => {
-    navigate("/");
-  };
-  const SettingsPage = () => {
-    navigate("/Settings");
-  };
 
   return (
     <main className="bg-blue-400 h-screen flex flex-row justify-center ">
@@ -144,39 +139,36 @@ export default function WelcomePage() {
       {/* division for friendsList and buttons(settings&logout)  */}
       <div className="w-1/4 flex-none  ">
         <div className="lg:mt-10 lg:ml-10 text-white lg:text-xl lg:w-[80%] lg:flex lg:justify-between  xxs:hidden ">
-          <p>Friends List</p>
+          <p>Friends List</p>{" "}
+          <div className="border-2 border-red-400 rounded-lg hover:bg-gray-400 text-black bg-gray-100">
+            <button>Add New Friend</button>
+          </div>
           <button title="Group Chat">
             <GroupAddOutlinedIcon fontSize="large" />
           </button>
         </div>
 
         <div className="fixed bottom-10">
+          {/* responsivepage icons for settings&logout */}
           <div>
+            <button className="lg:hidden fixed top-10 border-2 border-red-400 rounded-lg text-black bg-gray-100 ">
+              Add Friend
+            </button>
             <button
               onClick={SettingsPageResponsive}
-              className="lg:hidden fixed top-12 ml-9 text-black"
+              className="lg:hidden fixed top-12 ml-20 text-white"
             >
               <SettingsIcon fontSize="large" />
             </button>
             <button
               onClick={ResponsiveLogoutButton}
-              className="lg:hidden fixed top-5 left-5 mt-6 ml-8 text-black"
+              className="lg:hidden fixed top-5 left-7 mt-6 ml-8 text-white"
             >
               <LogoutIcon fontSize="large" />
             </button>
           </div>
-          <button
-            className="lg:mr-10 lg:border-2 lg:border-red-400 lg:rounded-lg lg:p-2 lg:m-2 lg:bg-gray-100 lg:hover:bg-gray-400 lg:text-2xl xxs:hidden"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
-          <button
-            className="lg:border-2 lg:border-red-400 lg:rounded-lg lg:p-2  lg:bg-gray-100 lg:hover:bg-gray-400 lg:text-xl xxs:hidden"
-            onClick={SettingsPage}
-          >
-            Go To Settings Page
-          </button>
+          <Logout />
+          <Settings />
         </div>
       </div>
     </main>
