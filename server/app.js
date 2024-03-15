@@ -38,8 +38,8 @@ io.on("connection", (socket) => {
 
 app.use(router); //use routes
 
-ioServer.listen(port2, () => {
-  console.log(`listening on *:${port2}`);
+ioServer.listen(port, () => {
+  console.log(`listening on *:${port}`);
 });
 
 ViteExpress.listen(app, VitePort, () =>
