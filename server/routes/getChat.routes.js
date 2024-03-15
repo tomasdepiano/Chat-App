@@ -11,9 +11,10 @@ getChats.get('/chats/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
     //to find chats where userId is either senderId or receiverId
-    const chats = await Chats.find({
+    const chats = await Chats.findAll({
       $or: [{ senderId: userId }, { receiverId: userId }],
     });
+    console.log(chats);
     const chatUserData = await Promise.all(
       chats.map(async (chat) => {
         //Assuming receiverId is an array and you're looking for first one that isn't the userId
