@@ -5,7 +5,7 @@ import { Router } from "express";
 import createAcountRoutes from "./createAccount.routes.js";
 import authRoutes from "./auth.routes.js";
 import chats from "./createChat.routes.js";
-import getChats from "./getChat.route.js";
+import getChats from "./getChat.routes.js";
 
 const router = Router();
 
