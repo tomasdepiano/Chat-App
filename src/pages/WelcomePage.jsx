@@ -139,7 +139,10 @@ export default function WelcomePage() {
       {/* division for friendsList and buttons(settings&logout)  */}
       <div className="w-1/4 flex-none  ">
         <div className="lg:mt-10 lg:ml-10 text-white lg:text-xl lg:w-[80%] lg:flex lg:justify-between  xxs:hidden ">
-          <p>Friends List</p>
+          <p>Friends List</p>{" "}
+          <div className="border-2 border-red-400 rounded-lg hover:bg-gray-400 text-black bg-gray-100">
+            <button>Add New Friend</button>
+          </div>
           <button title="Group Chat">
             <GroupAddOutlinedIcon fontSize="large" />
           </button>
@@ -148,9 +151,12 @@ export default function WelcomePage() {
         <div className="fixed bottom-10">
           {/* responsivepage icons for settings&logout */}
           <div>
+            <button className="lg:hidden fixed top-10 border-2 border-red-400 rounded-lg text-black bg-gray-100 ">
+              Add Friend
+            </button>
             <button
               onClick={SettingsPageResponsive}
-              className="lg:hidden fixed top-12 ml-16 text-white"
+              className="lg:hidden fixed top-12 ml-20 text-white"
             >
               <SettingsIcon fontSize="large" />
             </button>

@@ -1,8 +1,10 @@
-import React from 'react';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
+  const navigate = useNavigate();
   const SettingsPage = () => {
-    navigate('/Settings');
+    navigate("/Settings");
   };
   return (
     <div>
