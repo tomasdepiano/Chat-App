@@ -6,12 +6,17 @@ import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOu
 import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 // import Avatar from '../components/Avatar.jsx';
-import CallImage from '../components/CallImage.jsx';
-import io from 'socket.io-client';
-import SettingsIcon from '@mui/icons-material/Settings';
-import LogoutIcon from '@mui/icons-material/Logout';
-import Logout from '../components/Logout.jsx';
-import Settings from '../components/Settings.jsx';
+
+import CallImage from "../components/CallImage.jsx";
+import io from "socket.io-client";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Logout from "../components/Logout.jsx";
+import Settings from "../components/Settings.jsx";
+import NewMessageModal from "../modals/NewMessageModal.jsx";
+import useOpenCloseModal from "../hooks/useOpenCloseModal";
+
+
 
 const socket = io('http://localhost:3500', {
   transports: ['websocket'],
@@ -19,8 +24,9 @@ const socket = io('http://localhost:3500', {
 
 export default function WelcomePage() {
   const user = useSelector((state) => state.user);
-  const [message, setMessage] = useState('');
-  const [messageReceived, setMessageReceived] = useState('');
+
+  const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
+
 
   const navigate = useNavigate();
 
@@ -53,9 +59,16 @@ export default function WelcomePage() {
       {/* division for user details & messages */}
       <div className=" lg:mt-10 lg:ml-2 lg:text-white lg:text-lg lg:w-1/3 xxs:mt-10 xxs:ml-28 xxs:text-white">
         Hello, <span className="font-bold text-2xl text-red-700">{user} !</span>
-        <button className="ml-2" title="New Message">
+        <button
+          className="ml-2"
+          title="New Message"
+          onClick={() => {
+            setShowModal(true);
+          }}
+        >
           <MapsUgcOutlinedIcon fontSize="large" />
         </button>
+        <NewMessageModal onClose={closeModal} visible={showModal} />
       </div>
       {/* division for message input and otheruser  */}
       <div className="bg-white lg:w-2/3 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:items-center md: hidden">
@@ -121,18 +134,11 @@ export default function WelcomePage() {
         </div>
         {/* input for message */}
         <div className="fixed bottom-2 w-[25%] flex items-center ">
-          <Input
-            className=" w-[95%]  ml-1.5 "
-            placeholder="Type Here"
-            onChange={(event) => {
-              setMessage(event.target.value);
-            }}
-          />
+          <Input className=" w-[95%]  ml-1.5 " placeholder="Type Here" />
           <div className="w-[10%]">
             <button className="w-full">
               <ArrowCircleRightOutlinedIcon fontSize="large" />
             </button>
-            {messageReceived}
           </div>
         </div>
       </div>
@@ -141,7 +147,7 @@ export default function WelcomePage() {
         <div className="lg:mt-10 lg:ml-10 text-white lg:text-xl lg:w-[80%] lg:flex lg:justify-between  xxs:hidden ">
           <p>Friends List</p>{" "}
           <div className="border-2 border-red-400 rounded-lg hover:bg-gray-400 text-black bg-gray-100">
-            <button>Add New Friend</button>
+            <button>Add Friend</button>
           </div>
           <button title="Group Chat">
             <GroupAddOutlinedIcon fontSize="large" />
