@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Input from "../components/Input.jsx";
-import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
-import MapsUgcOutlinedIcon from "@mui/icons-material/MapsUgcOutlined";
-import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Input from '../components/Input.jsx';
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
+import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 // import Avatar from '../components/Avatar.jsx';
+
 import CallImage from "../components/CallImage.jsx";
 import io from "socket.io-client";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -15,29 +16,33 @@ import Settings from "../components/Settings.jsx";
 import NewMessageModal from "../modals/NewMessageModal.jsx";
 import useOpenCloseModal from "../hooks/useOpenCloseModal";
 
-const socket = io("http://localhost:3500", {
-  transports: ["websocket"],
+
+
+const socket = io('http://localhost:3500', {
+  transports: ['websocket'],
 });
 
 export default function WelcomePage() {
   const user = useSelector((state) => state.user);
+
   const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
+
 
   const navigate = useNavigate();
 
   function SettingsPageResponsive() {
-    navigate("/settings2");
+    navigate('/settings2');
   }
 
   function ResponsiveLogoutButton() {
-    navigate("/");
+    navigate('/');
   }
 
   useEffect(() => {
-    socket.on("connect", () => {
-      console.log("Connected");
+    socket.on('connect', () => {
+      console.log('Connected');
     });
-    socket.on("receive_message", (data) => {
+    socket.on('receive_message', (data) => {
       setMessageReceived(data.message);
     });
   }, []);
