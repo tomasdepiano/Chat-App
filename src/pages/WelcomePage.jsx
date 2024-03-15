@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Input from '../components/Input.jsx';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
-import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
+
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 // import Avatar from '../components/Avatar.jsx';
 import CallImage from '../components/CallImage.jsx';
@@ -13,6 +13,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Logout from '../components/Logout.jsx';
 import Settings from '../components/Settings.jsx';
 // import axios from 'axios';
+import Chats from '../components/Chats.jsx';
 
 const socket = io('http://localhost:3500', {
   transports: ['websocket'],
@@ -54,12 +55,7 @@ export default function WelcomePage() {
   return (
     <main className="bg-blue-400 h-screen flex flex-row justify-center ">
       {/* division for user details & messages */}
-      <div className=" lg:mt-10 lg:ml-2 lg:text-white lg:text-lg lg:w-1/3 xxs:mt-10 xxs:ml-28 xxs:text-white">
-        Hello, <span className="font-bold text-2xl text-red-700">{user} !</span>
-        <button className="ml-2" title="New Message">
-          <MapsUgcOutlinedIcon fontSize="large" />
-        </button>
-      </div>
+      <Chats />
       {/* division for message input and otheruser  */}
       <div className="bg-white lg:w-2/3 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:items-center md: hidden">
         {/* other user display */}
