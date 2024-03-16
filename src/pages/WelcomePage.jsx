@@ -1,21 +1,21 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import io from 'socket.io-client';
-import Chats from '../components/Chats.jsx';
-import Messages from '../components/Messages.jsx';
-import FriendsList from '../components/FriendsList.jsx';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import io from "socket.io-client";
+import Chats from "../components/Chats.jsx";
+import Messages from "../components/Messages.jsx";
+import FriendsList from "../components/FriendsList.jsx";
+import axios from "axios";
 
-const socket = io('http://localhost:3500', {
-  transports: ['websocket'],
+const socket = io("http://localhost:3500", {
+  transports: ["websocket"],
 });
 
 ///
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 useEffect(() => {
-  const loggedInUser = JSON.parse(localStorage.getItem('user:details'));
+  const loggedInUser = JSON.parse(localStorage.getItem("user:details"));
 
   const fetchConversations = async () => {
     try {
@@ -24,7 +24,7 @@ useEffect(() => {
       );
       setConversations(response.data);
     } catch (error) {
-      console.error('Error fetching conversations:', error);
+      console.error("Error fetching conversations:", error);
     }
   };
 
@@ -32,30 +32,30 @@ useEffect(() => {
 }, []);
 
 const [user, setUser] = useState(
-  JSON.parse(localStorage.getItem('user:detail'))
+  JSON.parse(localStorage.getItem("user:detail"))
 );
 const [conversations, setConversations] = useState([]);
-console.log('user:>>', user);
-console.log('conversations:>>', conversations);
+console.log("user:>>", user);
+console.log("conversations:>>", conversations);
 
 const fetchMessages = async (conversationId) => {
   try {
     const response = await axios({
-      method: 'get',
-      url: 'http://localhost:5044/api/messages/',
+      method: "get",
+      url: "http://localhost:5044/api/messages/",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       params: {
         conversationId,
         senderId: user?.id,
-        message: 'Hello',
-        receiverId: '',
+        message: "Hello",
+        receiverId: "",
       },
     });
-    console.log('resData:>>', response.data);
+    console.log("resData:>>", response.data);
   } catch (error) {
-    console.error('Error fetching messages:', error);
+    console.error("Error fetching messages:", error);
   }
 };
 ///
@@ -63,10 +63,10 @@ export default function WelcomePage() {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    socket.on('connect', () => {
-      console.log('Connected');
+    socket.on("connect", () => {
+      console.log("Connected");
     });
-    socket.on('receive_message', (data) => {
+    socket.on("receive_message", (data) => {
       setMessageReceived(data.message);
     });
   }, []);
