@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CreateIcon from "@mui/icons-material/Create";
+import axios from "axios";
 
 export default function NewMessageModal({ visible, onClose }) {
+  const [userList, setUserList] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/allUsers").then((res) => {
+      setUserList(res.data);
+    });
+  }, []);
+
   if (!visible) return null;
 
   return (
@@ -26,6 +35,15 @@ export default function NewMessageModal({ visible, onClose }) {
           >
             X
           </button>
+          <div>
+            {userList.map((person) => {
+              return (
+                <div className="p-10 border-b-2 border-slate-600">
+                  <button onClick={onClose}>{person.fname}</button>
+                </div>
+              );
+            })}
+          </div>
         </section>
       </main>
     </>

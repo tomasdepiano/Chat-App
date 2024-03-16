@@ -43,7 +43,9 @@ const FriendsList = () => {
         {friendsList.map((person) => {
           return (
             <div className="p-10 border-b-2 border-slate-600">
-              {person.fname} {person.lname}
+              <button>
+                {person.fname} {person.lname}
+              </button>
             </div>
           );
         })}

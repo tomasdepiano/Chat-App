@@ -35,7 +35,9 @@ const Chats = () => {
         {userList.map((person) => {
           return (
             <div className="p-10 border-b-2 border-slate-600">
-              {person.fname} {person.lname} {`(${person.username})`}
+              <button>
+                {person.fname} {person.lname} {`(${person.username})`}
+              </button>
             </div>
           );
         })}
