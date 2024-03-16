@@ -4,6 +4,7 @@ import NewMessageModal from "../modals/NewMessageModal.jsx";
 import useOpenCloseModal from "../hooks/useOpenCloseModal";
 import MapsUgcOutlinedIcon from "@mui/icons-material/MapsUgcOutlined";
 import axios from "axios";
+
 const Chats = () => {
   const user = useSelector((state) => state.user);
   const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
@@ -29,11 +30,11 @@ const Chats = () => {
         <MapsUgcOutlinedIcon fontSize="large" />
       </button>
       <NewMessageModal onClose={closeModal} visible={showModal} />
-      <div className="text-2xl flex justify-center p-2">Chats</div>
+      <div className="text-xl flex justify-center p-2">Chats</div>
       <div className="text-white p-10">
         {userList.map((person) => {
           return (
-            <div className="p-10">
+            <div className="p-10 border-b-2 border-slate-600">
               {person.fname} {person.lname} {`(${person.username})`}
             </div>
           );
