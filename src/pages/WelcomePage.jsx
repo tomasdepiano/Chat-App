@@ -1,40 +1,22 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import io from "socket.io-client";
+import Chats from "../components/Chats.jsx";
+import Messages from "../components/Messages.jsx";
+import FriendsList from "../components/FriendsList.jsx";
 
-// import Avatar from '../components/Avatar.jsx';
-
-import io from 'socket.io-client';
-
-import useOpenCloseModal from '../hooks/useOpenCloseModal';
-import Chats from '../components/Chats.jsx';
-import Messages from '../components/Messages.jsx';
-import FriendsList from '../components/FriendsList.jsx';
-
-const socket = io('http://localhost:3500', {
-  transports: ['websocket'],
+const socket = io("http://localhost:3500", {
+  transports: ["websocket"],
 });
 
 export default function WelcomePage() {
   const user = useSelector((state) => state.user);
 
-  const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
-
-  const navigate = useNavigate();
-
-  function SettingsPageResponsive() {
-    navigate('/settings2');
-  }
-
-  function ResponsiveLogoutButton() {
-    navigate('/');
-  }
-
   useEffect(() => {
-    socket.on('connect', () => {
-      console.log('Connected');
+    socket.on("connect", () => {
+      console.log("Connected");
     });
-    socket.on('receive_message', (data) => {
+    socket.on("receive_message", (data) => {
       setMessageReceived(data.message);
     });
   }, []);
