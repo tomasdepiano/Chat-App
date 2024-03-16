@@ -29,7 +29,7 @@ const Chats = () => {
         <MapsUgcOutlinedIcon fontSize="large" />
       </button>
       <NewMessageModal onClose={closeModal} visible={showModal} />
-
+      <div className="text-2xl flex justify-center p-2">Chats</div>
       <div className="text-white p-10">
         {userList.map((person) => {
           return (
@@ -40,11 +40,6 @@ const Chats = () => {
         })}
       </div>
     </main>
-
-      <div className=" text-primary text-lg">Chats</div>
-      <div className="  h-screen  w-full overflow-y-auto"></div>
-    </div>
-
   );
 };
 
