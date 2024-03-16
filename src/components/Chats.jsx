@@ -20,6 +20,8 @@ const Chats = () => {
         <MapsUgcOutlinedIcon fontSize="large" />
       </button>
       <NewMessageModal onClose={closeModal} visible={showModal} />
+      <div className=" text-primary text-lg">Chats</div>
+      <div className="  h-screen  w-full overflow-y-auto"></div>
     </div>
   );
 };

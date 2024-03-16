@@ -2,8 +2,23 @@ import React from 'react';
 import Input from '../components/Input.jsx';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import CallImage from '../components/CallImage.jsx';
-
+import { useState } from 'react';
 const Messages = () => {
+  const [messages, setmessages] = useState({});
+  const sendMessage = async (e) => {
+    const res = await fetch(`http://localhost:8000/api/message`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        conversationId: messages?.conversationId,
+        senderId: user?.id,
+        message,
+        receiverId: messages?.receiver?.receiverId,
+      }),
+    });
+  };
   return (
     <div className="bg-white lg:w-2/3 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:items-center md: hidden">
       {/* other user display */}
@@ -41,6 +56,29 @@ const Messages = () => {
             veritatis voluptates! Architecto non sed debitis mollitia.
           </div>
         </div>
+
+        {/* {
+          // !messages?.messages?.length > 0 ? (  with exclamation mark it will show 'No Messages'
+          !messages?.messages?.length > 0 ? (
+            messages.messages.map(({ message, user: { id } = {} }) => {
+              return (
+                <div
+                  className={`max-w-[40%] rounded-b-xl p-4 mb-6 ${
+                    id === user?.id
+                      ? 'bg-primary text-white rounded-tl-xl ml-auto'
+                      : 'bg-secondary rounded-tr-xl'
+                  }`}
+                >
+                  {message}
+                </div>
+              );
+            })
+          ) : (
+            <div className="text-center text-lg font-semibol mt-24">
+              No Messages or No COnversation Selected
+            </div>
+          )
+        } */}
       </div>
       {/* input for message */}
       <div className="fixed bottom-2 w-[25%] flex items-center ">
