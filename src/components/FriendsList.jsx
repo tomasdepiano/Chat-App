@@ -6,8 +6,11 @@ import Settings from "../components/Settings.jsx";
 import { useNavigate } from "react-router-dom";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 import axios from "axios";
+import GroupMessageModal from "../modals/GroupMessageModal.jsx";
+import useOpenCloseModal from "../hooks/useOpenCloseModal.jsx";
 
 const FriendsList = () => {
+  const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
   const [friendsList, setFriendsList] = useState([]);
   const navigate = useNavigate();
 
@@ -32,9 +35,15 @@ const FriendsList = () => {
         <div className="border-2 border-red-400 rounded-lg hover:bg-gray-400 text-black bg-gray-100">
           <button>Add Friend</button>
         </div>
-        <button title="Group Chat">
+        <button
+          title="Group Chat"
+          onClick={() => {
+            setShowModal(true);
+          }}
+        >
           <GroupAddOutlinedIcon fontSize="large" />
         </button>
+        <GroupMessageModal onClose={closeModal} visible={showModal} />
       </div>
       <div className="text-xl flex justify-center text-white p-2">
         Friends List
