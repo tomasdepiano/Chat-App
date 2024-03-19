@@ -4,6 +4,8 @@ import useOpenCloseModal from "../../hooks/useOpenCloseModal";
 import ChangeUserName from "../../modals/ChangeUserName";
 import ChangeEmail from "../../modals/ChangeEmail";
 import ChangePassWord from "../../modals/ChangePassword";
+import { useNavigate } from "react-router-dom";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 
 function SettingsButton() {
   const user = useSelector((state) => state.user);
@@ -14,9 +16,20 @@ function SettingsButton() {
     useOpenCloseModal(false);
   const [changeEmail, setChangeEmail, closeEmail] = useOpenCloseModal(false);
 
+  const navigate = useNavigate();
+
+  function BackToWelcomePage() {
+    navigate("/welcome");
+  }
+
   return (
     <>
       <main className="xxs:bg-blue-400 xxs:h-screen xxs:flex ">
+        <div className="text-white fixed top-[5%] ml-[5%]">
+          <button onClick={BackToWelcomePage}>
+            {<KeyboardBackspaceIcon fontSize="large" />}
+          </button>
+        </div>
         <div className=" xxs:mt-10 xxs:ml-[40%] xxs:justify-center xxs:text-white">
           {" "}
           Hello,{" "}

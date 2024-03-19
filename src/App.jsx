@@ -48,7 +48,7 @@ export default function App() {
   }, []);
   return (
     <>
-      <ParticlesBackground />
+      {/* <ParticlesBackground /> */}
 
       <RouterProvider router={router} />
     </>
