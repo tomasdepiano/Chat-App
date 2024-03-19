@@ -15,22 +15,22 @@ export default function NewMessageModal({ visible, onClose }) {
 
   return (
     <>
-      <main className="flex fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm z-[1] ">
-        <section className="bg-blue-400 py-16 px-16 rounded  w-[30%] mx-16 my-16">
-          <div className="flex w-96 rounded ">
+      <main className="flex fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm z-[1]  ">
+        <section className="bg-blue-400 py-16 px-16 rounded  lg:w-[30%] mx-16 my-16 xxs:w-[90%] flex flex-col">
+          <div className="flex w-96 rounded xxs:top-1">
             <input
-              className="border-2 border-red-400 rounded-lg w-[80%] text-black"
+              className="border-2 border-red-400 rounded-lg lg:w-[80%] text-black xxs:w-full xxs:p-2"
               type="search"
               name="search"
               id="search"
               placeholder="Search..."
             />
           </div>
-          <div className="fixed right-2/3 ">
+          <div className="lg:fixed lg:right-2/3 lg:p-2 lg: ml-5  ">
             <CreateIcon />
           </div>
           <button
-            className="  rounded-lg text-white p-2 fixed top-20 right-2/3  "
+            className="  lg:rounded-lg lg:text-white lg:p-2 lg:fixed lg:top-20 lg:right-2/3 lg:w-[10%] lg:left-96 xxs:top-14 xxs:left-[85%] xxs:p-3 xxs:text-3xl "
             onClick={onClose}
           >
             X
