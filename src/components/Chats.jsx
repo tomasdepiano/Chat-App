@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import NewMessageModal from "../modals/NewMessageModal.jsx";
-import useOpenCloseModal from "../hooks/useOpenCloseModal";
-import MapsUgcOutlinedIcon from "@mui/icons-material/MapsUgcOutlined";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import NewMessageModal from '../modals/NewMessageModal.jsx';
+import useOpenCloseModal from '../hooks/useOpenCloseModal';
+import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
+import axios from 'axios';
 
 const Chats = () => {
   const user = useSelector((state) => state.user);
@@ -11,7 +11,7 @@ const Chats = () => {
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/allUsers").then((res) => {
+    axios.get('/api/allUsers').then((res) => {
       console.log(res);
       setUserList(res.data);
     });
