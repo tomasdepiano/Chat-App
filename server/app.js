@@ -12,7 +12,8 @@ const app = express();
 const ioServer = createServer(app);
 const io = new SocketIOServer(ioServer);
 
-const port = "5044";
+const port = "3500";
+const VitePort = "3501";
 ViteExpress.config({ printViterDevServerHost: true });
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
@@ -21,7 +22,7 @@ app.use(
   session({
     secret: "ssshhhhh",
     saveUninitialized: true,
-    resave: false
+    resave: false,
   })
 );
 app.use(cors());
@@ -35,14 +36,12 @@ io.on("connection", (socket) => {
   });
 });
 
-
-app.use(router);//use routes
-
+app.use(router); //use routes
 
 ioServer.listen(port, () => {
   console.log(`listening on *:${port}`);
 });
 
-ViteExpress.listen(app, 3500, () =>
-  console.log(`Server is listening on http://localhost:${3500}`)
+ViteExpress.listen(app, VitePort, () =>
+  console.log(`Server is listening on http://localhost:${VitePort}`)
 );

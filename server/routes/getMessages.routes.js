@@ -15,7 +15,7 @@ getMessages.get('/messages/:chatId', async (req, res) => {
     // if conversation id is already exist it continue to find that conversation Id and start sending messages
     const messages = await Messages.find({ chatId });
     const messageUserData = Promise.all(messages.map(async (message) => {
-      const user = await Users.findById(message.senderId);
+      const user = await User.findById(message.senderId);
       return {
         user: { email: user.email, fullName: user.fullName }, message: message.message
       }
