@@ -31,10 +31,10 @@ const Chats = () => {
       </button>
       <NewMessageModal onClose={closeModal} visible={showModal} />
       <div className="text-xl flex justify-center p-2">Chats</div>
-      <div className="text-white p-10">
+      <div className="text-white p-5 font-bold">
         {userList.map((person) => {
           return (
-            <div className="p-10 border-b-2 border-slate-600">
+            <div className="p-10 border-b-2 border-t-2 border-slate-600 ">
               <button>
                 {person.fname} {person.lname} {`(${person.username})`}
               </button>

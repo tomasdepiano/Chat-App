@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CreateIcon from "@mui/icons-material/Create";
 import axios from "axios";
 
-export default function NewMessageModal({ visible, onClose }) {
+export default function GroupMessageModal({ visible, onClose }) {
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
