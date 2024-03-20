@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 function ChangeEmail({ visible, onClose }) {
   const handleOnClose = (e) => {
-    if (e.target.id === 'container') onClose();
+    if (e.target.id === "container") onClose();
   };
   if (!visible) return null;
   return (

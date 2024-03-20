@@ -22,11 +22,13 @@ function SettingsPage() {
 
   return (
     <main className="h-screen w-screen bg-blue-400 ">
-      <h1 className="text-xl font-bold text-center p-2">Settings</h1>
+      <h1 className="text-xl font-bold text-center p-2 text-white ">
+        Settings
+      </h1>
       <section className="flex flex-col items-center w-full mt-8 justify-evenly">
-        <article className="flex">
+        <article className="flex text-white">
           <p className="p-2 ">
-            UserName: <span className="font-bold">{user}</span>
+            Username: <span className="font-bold">{user}</span>
           </p>
           {/* <lable >UserName:</lable>
           <label className="p-2">UserName:</label>
@@ -39,13 +41,13 @@ function SettingsPage() {
               // e.preventDefault();
               setChangeUserName(true);
             }}
-            className="w-22 border-2 border-gray-400 rounded-lg bg-gray-100 ml-2 p-1.5 hover:bg-gray-400"
+            className="w-22 border-2 border-gray-400 rounded-lg bg-gray-100 ml-2 p-1.5 hover:bg-gray-400 text-black"
           >
-            Change UserName
+            Change Username
           </button>
         </article>
 
-        <article className="flex mt-4 justify-evenly">
+        <article className="flex mt-4 justify-evenly text-white">
           <p className="p-2 ">
             Email: <span className="font-bold">{email}</span>
           </p>
@@ -56,32 +58,29 @@ function SettingsPage() {
           /> */}
           <button
             onClick={() => {
-              setChangePassWord(true);
+              setChangeEmail(true);
             }}
-            className="w-22 border-2 border-gray-400 rounded-lg bg-gray-100 ml-2 p-1.5 hover:bg-gray-400"
+            className="w-22 border-2 border-gray-400 rounded-lg bg-gray-100 ml-2 p-1.5 hover:bg-gray-400 text-black"
           >
             Change Email
           </button>
         </article>
-        <article className="flex mt-4 justify-evenly">
-          <label className="p-2 ">password:</label>
-          <input
-            type="password"
-            className="border-2 border-red-500 w-22 max-w-xs rounded-md"
-          />
+        <article className="flex mt-4 justify-evenly text-white">
+          <label className="p-2 ">Password:******</label>
+
           <button
             onClick={() => {
-              setChangeEmail(true);
+              setChangePassWord(true);
             }}
-            className="w-22 border-2 border-gray-400 rounded-lg bg-gray-100 ml-2 pl-6 pr-6 hover:bg-gray-400"
+            className="w-22 border-2 border-gray-400 rounded-lg bg-gray-100 ml-2 pl-6 pr-6 hover:bg-gray-400 text-black"
           >
             Change Password
           </button>
         </article>
       </section>
       <ChangeUserName onClose={closeUserName} visible={changeUserName} />
-      <ChangePassWord onClose={closePassword} visible={changePassWord} />
       <ChangeEmail onClose={closeEmail} visible={changeEmail} />
+      <ChangePassWord onClose={closePassword} visible={changePassWord} />
     </main>
   );
 }
