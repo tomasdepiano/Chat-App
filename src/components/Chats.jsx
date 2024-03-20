@@ -8,14 +8,13 @@ import axios from 'axios';
 const Chats = () => {
   // const user = useSelector((state) => state.user);
   const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
-  // const [userList, setUserList] = useState([]);
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem('user:detail'))
   );
   const [conversations, setConversations] = useState([]);
   console.log('user:>>', user);
   console.log('conversations:>>', conversations);
-
+  const [userList, setUserList] = useState([]);
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem('user:details'));
     const fetchConversations = async () => {
@@ -28,10 +27,10 @@ const Chats = () => {
         console.error('Error fetching conversations:', error);
       }
     };
-    // axios.get('/api/allUsers').then((res) => {
-    //   console.log(res);
-    //   setUserList(res.data);
-    // });
+    axios.get('/api/allUsers').then((res) => {
+      console.log(res);
+      setUserList(res.data);
+    });
 
     fetchConversations();
   }, []);
@@ -51,9 +50,9 @@ const Chats = () => {
       <NewMessageModal onClose={closeModal} visible={showModal} />
       <div className="text-xl flex justify-center p-2">Chats</div>
       <div className="text-white p-10">
-        {userList.map((person) => {
+        {userList.map((person, index) => {
           return (
-            <div className="p-10 border-b-2 border-slate-600">
+            <div key={index} className="p-10 border-b-2 border-slate-600">
               <button>
                 {person.fname} {person.lname} {`(${person.username})`}
               </button>
