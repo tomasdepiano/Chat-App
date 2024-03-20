@@ -51,8 +51,8 @@ const FriendsList = () => {
       <div className="text-white p-10 text-xl">
         {friendsList.map((person) => {
           return (
-            <div className="p-10 border-b-2 border-slate-600">
-              <button>
+            <div className="p-10 ">
+              <button className="border-2 border-red-400">
                 {person.fname} {person.lname}
               </button>
             </div>
