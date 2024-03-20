@@ -61,13 +61,13 @@ function SettingsPage() {
             }}
             className="w-22 border-2 border-gray-400 rounded-lg bg-gray-100 ml-2 p-1.5 hover:bg-gray-400"
           >
-            Change Password
+            Change Email
           </button>
         </article>
         <article className="flex mt-4 justify-evenly">
-          <label className="p-2 ">Email:</label>
+          <label className="p-2 ">password:</label>
           <input
-            type="email"
+            type="password"
             className="border-2 border-red-500 w-22 max-w-xs rounded-md"
           />
           <button
@@ -76,7 +76,7 @@ function SettingsPage() {
             }}
             className="w-22 border-2 border-gray-400 rounded-lg bg-gray-100 ml-2 pl-6 pr-6 hover:bg-gray-400"
           >
-            Change Email
+            Change Password
           </button>
         </article>
       </section>
