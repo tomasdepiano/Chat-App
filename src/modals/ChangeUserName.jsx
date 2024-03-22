@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 function ChangeUserName({ visible, onClose }) {
   const handleOnClose = (e) => {
     if (e.target.id === "container") onClose();
   };
+
+  const [newUsername, setNewUsername] = useState("");
+
+  function updateUsername() {
+    axios.put("/api/editUsername", {
+      username: newUsername,
+    });
+  }
+
   if (!visible) return null;
   return (
     <div
@@ -19,11 +29,26 @@ function ChangeUserName({ visible, onClose }) {
           </div>
           <div className="mt-4">
             <label className="mr-2 pl-4">New Username:</label>
-            <input className="border-2 border-black rounded-md" />
+            <input
+              type="text"
+              onChange={(e) => {
+                setNewUsername(e.target.value);
+              }}
+              value={newUsername}
+              className="border-2 border-black rounded-md"
+            />
           </div>
 
           <div className="mt-6">
-            <button className="border-2 border-gray-500 bg-gray-100 rounded-md mr-4 p-1">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                updateUsername();
+                window.alert("username has been updated");
+                onClose();
+              }}
+              className="border-2 border-gray-500 bg-gray-100 rounded-md mr-4 p-1"
+            >
               Update Username
             </button>
             <button

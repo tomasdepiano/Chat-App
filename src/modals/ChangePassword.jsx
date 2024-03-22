@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 function ChangePassWord({ visible, onClose }) {
   const handleOnClose = (e) => {
     if (e.target.id === "container") onClose();
   };
+
+  const [newPassword, setNewPassword] = useState("");
+
+  function updatePassword() {
+    axios.put("/api/editPassword", {
+      password: newPassword,
+    });
+  }
+
   if (!visible) return null;
   return (
     <div
@@ -23,13 +33,25 @@ function ChangePassWord({ visible, onClose }) {
           <div className="mt-4">
             <label className="mr-2 pl-4">New Password:</label>
             <input
-              type="passsword"
+              onChange={(e) => {
+                setNewPassword(e.target.value);
+              }}
+              value={newPassword}
+              type="password"
               className="border-2 border-black rounded-md"
             />
           </div>
 
           <div className="mt-6">
-            <button className="border-2 border-gray-500 bg-gray-100 rounded-md mr-4 p-1">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                updatePassword();
+                window.alert("password has been updated");
+                onClose();
+              }}
+              className="border-2 border-gray-500 bg-gray-100 rounded-md mr-4 p-1"
+            >
               Update Password
             </button>
             <button

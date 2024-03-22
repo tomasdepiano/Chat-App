@@ -1,5 +1,4 @@
 import axios from "axios";
-import { update } from "lodash";
 import React, { useState } from "react";
 
 function ChangeEmail({ visible, onClose }) {
