@@ -17,6 +17,7 @@ Chats.init(
       autoIncrement: true,
     },
     senderId: {
+
       type: DataTypes.ARRAY(DataTypes.INTEGER),
       // references: {
       //   model: User,
@@ -29,6 +30,7 @@ Chats.init(
       //   model: User,
       //   key: "user_id",
       // },
+
     },
   },
   {

@@ -1,10 +1,14 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const Logout = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleLogout = () => {
-    navigate("/");
+    //dispatching the logout action
+    dispatch({ type: 'USER_LOG_OUT' });
+    navigate('/');
   };
   return (
     <button

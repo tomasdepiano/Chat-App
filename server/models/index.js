@@ -4,8 +4,10 @@ import Chats from "./Chats.model.js";
 
 User.hasMany(Messages, { foreignKey: "userId" });
 Messages.belongsTo(User, { foreignKey: "userId" });
+
 Chats.hasMany(Messages, { foreignKey: "chatId" });
 Messages.belongsTo(Chats, { foreignKey: "chatId" });
+
 
 //export default can't contain mutiple things in object
 export { User, Messages, Chats };

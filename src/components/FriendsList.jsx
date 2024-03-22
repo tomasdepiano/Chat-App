@@ -1,35 +1,38 @@
-import React, { useEffect, useState } from "react";
-import SettingsIcon from "@mui/icons-material/Settings";
-import LogoutIcon from "@mui/icons-material/Logout";
-import Logout from "../components/Logout.jsx";
-import Settings from "../components/Settings.jsx";
-import { useNavigate } from "react-router-dom";
-import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
-import axios from "axios";
-import GroupMessageModal from "../modals/GroupMessageModal.jsx";
-import useOpenCloseModal from "../hooks/useOpenCloseModal.jsx";
+import React, { useEffect } from 'react';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Logout from '../components/Logout.jsx';
+import Settings from '../components/Settings.jsx';
+import { useNavigate } from 'react-router-dom';
+import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
+import axios from 'axios';
+import GroupMessageModal from '../modals/GroupMessageModal.jsx';
+import useOpenCloseModal from '../hooks/useOpenCloseModal.jsx';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchFriends } from '../redux/friendsActions.js';
 
 const FriendsList = () => {
   const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
-  const [friendsList, setFriendsList] = useState([]);
+  // const [friendsList, setFriendsList] = useState([]);
   const navigate = useNavigate();
 
   function SettingsPageResponsive() {
-    navigate("/settings2");
+    navigate('/settings2');
   }
 
   function ResponsiveLogoutButton() {
-    navigate("/");
+    navigate('/');
   }
 
+  const dispatch = useDispatch();
+  const friendsList = useSelector((state) => state.friendsList); // Update this path based on your Redux state structure
+  // console.log('friendsList from redux=>', friendsList);
+
   useEffect(() => {
-    axios.get("/api/allUsers").then((res) => {
-      setFriendsList(res.data);
-    });
-  }, []);
+    fetchFriends();
+  }, [dispatch]);
 
   return (
-    // division for friendsList and buttons(settings&logout)
     <div className="w-1/4 flex-none  ">
       <div className="lg:mt-10 lg:ml-10 text-white lg:text-xl lg:w-[80%] lg:flex lg:justify-between  xxs:hidden ">
         <div className="border-2 border-red-400 rounded-lg hover:bg-gray-400 text-black bg-gray-100">
@@ -49,12 +52,14 @@ const FriendsList = () => {
         Friends List
       </div>
       <div className="text-white p-10 text-xl">
-        {friendsList.map((person) => {
+        {friendsList.map((friend) => {
+          // console.log('friendsList:', friend);
           return (
-            <div className="p-10 ">
-              <button className="border-2 border-red-400">
-                {person.fname} {person.lname}
-              </button>
+            <div
+              key={friend.userId}
+              className=" m-2 cursor-pointer hover:font-bold "
+            >
+              {friend.username}
             </div>
           );
         })}
