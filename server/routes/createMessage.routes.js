@@ -15,7 +15,6 @@ createMessageRouter.post('/message', async (req, res) => {
       return res.status(400).json({ message: "Please fill all required fields" }) // need to fill both senderId and message text
 
 
-    //if chatId is not provided, create a new Chat
     if (!ChatId && receiverId) {
       const chat = new Chats({
         $or: [{ senderId: userId }, { receiverId: userId }]

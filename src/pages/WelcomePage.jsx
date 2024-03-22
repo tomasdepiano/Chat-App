@@ -1,35 +1,33 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import Chats from '../components/Chats.jsx';
 import Messages from '../components/Messages.jsx';
 import FriendsList from '../components/FriendsList.jsx';
 import axios from 'axios';
 
-const socket = io('http://localhost:3500', {
-  transports: ['websocket'],
-});
+// const socket = io('http://localhost:3500', {
+//   transports: ['websocket'],
+// });
 
 export default function WelcomePage() {
-  const user = useSelector((state) => state.user);
+  // const user = useSelector((state) => state.user);
 
-  useEffect(() => {
-    socket.on('connect', () => {
-      console.log('Connected');
-    });
-    socket.on('receive_message', (data) => {
-      setMessageReceived(data.message);
-    });
-  }, []);
-  console.log(user);
+  // useEffect(() => {
+  //   socket.on('connect', () => {
+  //     console.log('Connected');
+  //   });
+  //   socket.on('receive_message', (data) => {
+  //     setMessageReceived(data.message);
+  //   });
+  // }, []);
+  // console.log(user);
 
   // const sendMessage = () => {
   //   socket.emit("send_message", {
   //     message,
   //   });
   // };
-
-  useEffect(() => {}, []);
 
   //
   //
