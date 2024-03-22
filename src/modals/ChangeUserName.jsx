@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from "react";
+import axios from "axios";
 
 function ChangeUserName({ visible, onClose }) {
   const handleOnClose = (e) => {
-    if (e.target.id === 'container') onClose();
+    if (e.target.id === "container") onClose();
   };
+
+  const [newUsername, setNewUsername] = useState("");
+
+  function updateUsername() {
+    axios.put("/api/editUsername", {
+      username: newUsername,
+    });
+  }
+
   if (!visible) return null;
   return (
     <div
@@ -14,17 +24,32 @@ function ChangeUserName({ visible, onClose }) {
       <div className="bg-white p-2 rounded py-16 px-16 flex flex-col xs:py-6 xs:px-6">
         <form>
           <div>
-            <label className="mr-1">Current UserName:</label>
+            <label className="mr-1">Current Username:</label>
             <input className="border-2 border-black rounded-md " />
           </div>
           <div className="mt-4">
-            <label className="mr-2 pl-4">New UserName:</label>
-            <input className="border-2 border-black rounded-md" />
+            <label className="mr-2 pl-4">New Username:</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setNewUsername(e.target.value);
+              }}
+              value={newUsername}
+              className="border-2 border-black rounded-md"
+            />
           </div>
 
           <div className="mt-6">
-            <button className="border-2 border-gray-500 bg-gray-100 rounded-md mr-4 p-1">
-              Update UserName
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                updateUsername();
+                window.alert("username has been updated");
+                onClose();
+              }}
+              className="border-2 border-gray-500 bg-gray-100 rounded-md mr-4 p-1"
+            >
+              Update Username
             </button>
             <button
               onClick={onClose}

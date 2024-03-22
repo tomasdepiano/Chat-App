@@ -6,6 +6,7 @@ import createMessageRouter from "./createMessage.routes.js";
 import getMessages from "./getMessages.routes.js";
 import getChats from "./getChat.routes.js";
 import allUsersRoutes from "./allUsers.routes.js";
+import userRouter from "./user.routes.js";
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use("/api", createMessageRouter);
 router.use("/api", getMessages);
 router.use("/api", getChats);
 router.use("/api", allUsersRoutes);
+router.use("/api", userRouter);
 
 export default router;

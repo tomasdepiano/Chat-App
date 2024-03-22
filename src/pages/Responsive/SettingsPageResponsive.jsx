@@ -75,8 +75,8 @@ function SettingsButton() {
           </p>
         </div>
         <ChangeUserName onClose={closeUserName} visible={changeUserName} />
-        <ChangePassWord onClose={closePassword} visible={changePassWord} />
         <ChangeEmail onClose={closeEmail} visible={changeEmail} />
+        <ChangePassWord onClose={closePassword} visible={changePassWord} />
       </main>
     </>
   );

@@ -1,9 +1,19 @@
-import React from 'react';
+import axios from "axios";
+import React, { useState } from "react";
 
 function ChangeEmail({ visible, onClose }) {
   const handleOnClose = (e) => {
-    if (e.target.id === 'container') onClose();
+    if (e.target.id === "container") onClose();
   };
+
+  const [newEmail, setNewEmail] = useState("");
+
+  function updateEmail() {
+    axios.put("/api/editEmail", {
+      email: newEmail,
+    });
+  }
+
   if (!visible) return null;
   return (
     <div
@@ -19,11 +29,26 @@ function ChangeEmail({ visible, onClose }) {
           </div>
           <div className="mt-4">
             <label className="mr-2 pl-4">New Email:</label>
-            <input type="email" className="border-2 border-black rounded-md" />
+            <input
+              type="text"
+              className="border-2 border-black rounded-md"
+              onChange={(e) => {
+                setNewEmail(e.target.value);
+              }}
+              value={newEmail}
+            />
           </div>
 
           <div className="mt-6">
-            <button className="border-2 border-gray-500 bg-gray-100 rounded-md mr-4 p-1">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                updateEmail();
+                window.alert("email has been updated");
+                onClose();
+              }}
+              className="border-2 border-gray-500 bg-gray-100 rounded-md mr-4 p-1"
+            >
               Update Email
             </button>
             <button
