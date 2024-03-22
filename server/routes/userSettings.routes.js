@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { User } from "../models/index.js";
 
-const userRouter = Router();
+const userSettingsRouter = Router();
 
-userRouter.put("/editEmail", async (req, res) => {
+userSettingsRouter.put("/editEmail", async (req, res) => {
   const { email } = req.body;
   const userId = req.session.userId || req.body.userId;
   console.log(req.body);
@@ -21,7 +21,7 @@ userRouter.put("/editEmail", async (req, res) => {
   //   console.log(user);
 });
 
-userRouter.put("/editUsername", async (req, res) => {
+userSettingsRouter.put("/editUsername", async (req, res) => {
   const { username } = req.body;
   const userId = req.session.userId || req.body.userId;
   console.log(username);
@@ -38,7 +38,7 @@ userRouter.put("/editUsername", async (req, res) => {
   );
 });
 
-userRouter.put("/editPassword", async (req, res) => {
+userSettingsRouter.put("/editPassword", async (req, res) => {
   const { password } = req.body;
   const userId = req.session.userId || req.body.userId;
 
@@ -54,4 +54,4 @@ userRouter.put("/editPassword", async (req, res) => {
   );
 });
 
-export default userRouter;
+export default userSettingsRouter;
