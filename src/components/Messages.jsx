@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Input from '../components/Input.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
@@ -14,6 +14,7 @@ const Messages = () => {
   const messageText = useSelector((state) => state.messageText);
   const userId = useSelector((state) => state.userId);
   const user = useSelector((state) => state.user);
+  const newMessage = useRef(null);
   console.log('users in message.js:', user);
   useEffect(() => {
     if (selectedChatId) {
@@ -26,36 +27,48 @@ const Messages = () => {
       // Fetch messages for the selected chat
     }
   }, [selectedChatId, dispatch]);
-  console.log('messages:', messages);
-  const handleSendMessage = (e) => {
+
+  // const handleSendMessage = (e) => {
+  //   e.preventDefault();
+  //   console.log('Message Text', messageText.trim());
+  //   if (messageText.trim()) {
+  //     console.log('MessageText:', messageText);
+  //     const message = {
+  //       chatId: selectedChatId,
+  //       // text: messageText,
+  //       senderId: userId,
+  //     };
+  //     dispatch(createMessage(message));
+  //     console.log('messages:', messages);
+  //     fetchMessages('');
+  //   }
+  // };
+  const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (messageText.trim()) {
-      console.log('MessageText:', messageText);
-      const message = {
-        chatId: selectedChatId,
-        // text: messageText,
-        senderId: userId,
-      };
-      dispatch(createMessage(message));
-      fetchMessages('');
-    }
-  };
-  const setSendMessage = async () => {
+    console.log({
+      chatId: selectedChatId,
+      senderId: userId,
+      // message: sendmessage, // Ensure this is the correct field name for the message content
+      // receiverId: ,
+      text: newMessage.current.value,
+    });
     try {
       const payload = {
         chatId: messages?.chatId,
         senderId: user?.id,
         // message: sendmessage, // Ensure this is the correct field name for the message content
         receiverId: messages?.receiver?.receiverId,
+        text: newMessage.current.value,
       };
 
       const response = await axios.post('/api/message', payload);
       console.log('resData:>>', response.data);
-      setSendMessage(''); // Clear the input field after sending the message
+      handleSendMessage(''); // Clear the input field after sending the message
     } catch (error) {
       console.error('Error sending message:', error);
     }
   };
+
   return (
     <div className="bg-white lg:w-2/3 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:items-center md: hidden">
       {/* other user display */}
@@ -108,9 +121,10 @@ const Messages = () => {
           type="text"
           required
           // onChange={(e) => setSendMessage(e.target.value)}
+          newMessage={newMessage}
         />
         <div className="w-[10%]">
-          <button className="w-full" onClick={() => handleSendMessage()}>
+          <button className="w-full" onClick={(e) => handleSendMessage(e)}>
             <ArrowCircleRightOutlinedIcon fontSize="large" />
           </button>
         </div>

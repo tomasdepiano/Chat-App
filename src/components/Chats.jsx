@@ -11,6 +11,9 @@ const Chats = () => {
   const userId = useSelector((state) => state.userId);
   // console.log('userId from reducer', userId);
   const chats = useSelector((state) => state.chats);
+  {
+    console.log(chats);
+  }
   // console.log('chats from reducer', chats);
   // const id = useSelector((state) => state.id);
   // console.log('user from reduxstate', user, id);

@@ -40,9 +40,14 @@ const FriendsList = () => {
     }
   }, [dispatch]);
   const handleFriendClick = async (friend) => {
-    const existingChat = chats.find((chat) =>
-      chat.users.includes(friend.userId)
-    );
+    console.log(chats);
+    console.log(friend.userId);
+    const existingChat = chats.find((chat) => {
+      // console.log(chat);
+      // chat.users.includes(friend.userId);
+      return chat.user.userId === friend.userId;
+    });
+    console.log(existingChat);
     if (existingChat) {
       dispatch(setSelectedChatId(existingChat.chatId));
     } else {
