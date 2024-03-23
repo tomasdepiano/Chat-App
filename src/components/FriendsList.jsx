@@ -10,10 +10,11 @@ import GroupMessageModal from '../modals/GroupMessageModal.jsx';
 import useOpenCloseModal from '../hooks/useOpenCloseModal.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchFriends } from '../redux/friendsActions.js';
-
+import { setSelectedChatId, createChat } from '../redux/chatActions.js';
 const FriendsList = () => {
   const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
-  // const [friendsList, setFriendsList] = useState([]);
+
+  // const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   function SettingsPageResponsive() {
@@ -25,12 +26,38 @@ const FriendsList = () => {
   }
 
   const dispatch = useDispatch();
-  const friendsList = useSelector((state) => state.friendsList); // Update this path based on your Redux state structure
+  const friendsList = useSelector((state) => state.friendsList);
   // console.log('friendsList from redux=>', friendsList);
+  const chats = useSelector((state) => state.chats);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    fetchFriends();
+    if (friendsList) {
+      axios.get('/api/allUsers').then((res) => {
+        console.log('friends list:', res);
+        dispatch(fetchFriends(res.data));
+      });
+    }
   }, [dispatch]);
+  const handleFriendClick = async (friend) => {
+    const existingChat = chats.find((chat) =>
+      chat.users.includes(friend.userId)
+    );
+    if (existingChat) {
+      dispatch(setSelectedChatId(existingChat.chatId));
+    } else {
+      //create new chat
+      try {
+        const response = await axios.post('/api/chats', {
+          users: [user.id, friend.userId],
+        });
+        dispatch(createChat(response.data));
+        dispatch(setSelectedChatId(response.data.chatId));
+      } catch (error) {
+        console.error('Error createing chat:', error);
+      }
+    }
+  };
 
   return (
     <div className="w-1/4 flex-none  ">
@@ -58,6 +85,7 @@ const FriendsList = () => {
             <div
               key={friend.userId}
               className=" m-2 cursor-pointer hover:font-bold "
+              onClick={() => handleFriendClick(friend)}
             >
               {friend.username}
             </div>

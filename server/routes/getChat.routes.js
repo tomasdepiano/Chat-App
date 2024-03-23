@@ -1,6 +1,4 @@
 import { Router } from 'express';
-// import Chats from "../models/Chats.model.js";
-
 import { User, Chats } from '../models/index.js';
 
 const getChats = Router();
@@ -17,13 +15,13 @@ getChats.get('/chats/:userId', async (req, res) => {
     });
     console.log(chats);
     if (!chats) {
-      res.send([]);
+      res.send([]); //empty array: no messages found
     }
     const chatUserData = await Promise.all(
       chats.map(async (chat) => {
         //Assuming receiverId is an array and you're looking for first one that isn't the userId
         let chattedId;
-        if (chat.senderId !== +userId) {
+        if (chat.senderId !== userId) {
           console.log('if invoked');
           chattedId = chat.senderId;
         } else {
@@ -33,7 +31,7 @@ getChats.get('/chats/:userId', async (req, res) => {
         }
         console.log('chattedId', chattedId);
         const user = await User.findOne({ where: { userId: chattedId } });
-
+        console.log('user in chats', user);
         return {
           user: {
             email: user?.email,
@@ -56,3 +54,13 @@ getChats.get('/chats/:userId', async (req, res) => {
 });
 
 export default getChats;
+
+
+
+
+
+
+
+
+
+

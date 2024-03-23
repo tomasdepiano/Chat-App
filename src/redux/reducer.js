@@ -7,6 +7,7 @@ const initialState = {
   isLoggedIn: false,
   chats: [],
   messages: [],
+  messageText: '',
   friendsList: [],
   selectedChatId: ''
 };
@@ -26,12 +27,14 @@ export default function reducer(state = initialState, action) {
         email: action.payload.email,
 
       };
+    //fetching chat
     case actionTypes.SET_CHATS:
       return {
         ...state,
         chats: action.payload,
       }
-    case actionTypes.ADD_CHAT:
+    // create chat
+    case actionTypes.CREATE_CHAT: //creating chat
       return {
         ...state,
         chats: [...state.chats, action.payload],
@@ -51,6 +54,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         messages: [...state.messages, action.payload],
       }
+    case actionTypes.CREATE_MESSAGES:
+      return {
+        ...state,
+        messageText: ''
+      }
     case actionTypes.SET_FRIENDS:
       return {
         ...state,
@@ -64,7 +72,7 @@ export default function reducer(state = initialState, action) {
     //     user: action.payload.username,
     //     email: action.payload.email,
     //   };
-    case "USER_LOG_OUT":
+    case "USER_LOGOUT":
       return initialState;
     default:
       return state;
