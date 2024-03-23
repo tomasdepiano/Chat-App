@@ -1,15 +1,25 @@
 import { Router } from "express";
 import { User } from "../models/index.js";
 
+import bcrypt from 'bcrypt';
+
 // import { loginRequired } from "../middlewares/auth.middleware.js";
 
 const authRoutes = Router();
 
+
+
 authRoutes.post("/auth", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ where: { username: username } });
+  console.log('user from auth routes:', user);
 
-  if (user && user.password === password) {
+  if (!user) {
+    return res.json({ success: false, message: 'User not found' });
+  }
+  const passwordIsValid = await bcrypt.compare(password, user.password);
+  if (passwordIsValid) {
+    console.log('Hit Password is valid')
     req.session.userId = user.userId;
     res.json({
       success: true,
@@ -18,14 +28,19 @@ authRoutes.post("/auth", async (req, res) => {
       username: user.username,
     });
   } else {
-    res.json({ success: false });
+    console.log('Did Not Hit Password is valid')
+    res.json({ success: false, message: 'Invalid credentials' });
   }
 });
 
 // Note the `loginRequired` argument passed to the routes below!
 
 authRoutes.post("/api/logout", (req, res) => {
-  req.session.destroy();
+  // req.session.destroy(err => {
+  //   if (err) {
+  //     return res, json({ success: false, message: 'Unable to logout' })
+  //   }
+  // });
   res.json({ success: true });
 });
 

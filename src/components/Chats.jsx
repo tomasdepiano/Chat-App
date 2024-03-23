@@ -8,7 +8,6 @@ import { fetchChats, setSelectedChatId } from '../redux/chatActions.js';
 import { fetchMessages } from '../redux/messageActions.js';
 const Chats = () => {
   const user = useSelector((state) => state.user);
-
   const userId = useSelector((state) => state.userId);
   // console.log('userId from reducer', userId);
   const chats = useSelector((state) => state.chats);

@@ -15,22 +15,21 @@ Chats.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+
     },
     senderId: {
-
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
-      // references: {
-      //   model: User,
-      //   key: "user_id",
-      // },
+      type: DataTypes.INTEGER,
+      references: {
+        model: "users",
+        key: 'user_id'
+      }
     },
     receiverId: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER), // sequelize can support ARRAY datatype with postgreSQL
-      // references: {
-      //   model: User,
-      //   key: "user_id",
-      // },
-
+      type: DataTypes.INTEGER, // sequelize can support ARRAY datatype with postgreSQL
+      references: {
+        model: "users",
+        key: 'user_id'
+      }
     },
   },
   {

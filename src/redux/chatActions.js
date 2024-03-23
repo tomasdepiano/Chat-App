@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { SELECTED_CHATID, SET_CHATS } from './actionTypes';
+
+import { CREATE_CHAT, SELECTED_CHATID, SET_CHATS } from './actionTypes';
 // import * as actionTypes from './actionTypes';
 
 // Action creator for fetching chats
@@ -18,3 +17,7 @@ export const setSelectedChatId = (chatId) => {
     payload: chatId
   }
 }
+export const createChat = (chat) => ({
+  type: CREATE_CHAT,
+  payload: chat,
+})
