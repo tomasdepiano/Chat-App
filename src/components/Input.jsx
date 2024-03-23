@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Input({
   label,
@@ -7,6 +7,7 @@ export default function Input({
   placeholder,
   className,
   type,
+  newMessage,
 }) {
   return (
     <div className={`lg:flex lg:items-center lg:w-96    ${className}`}>
@@ -21,6 +22,7 @@ export default function Input({
         value={value}
         placeholder={placeholder}
         type={type}
+        ref={newMessage}
       />
     </div>
   );

@@ -9,7 +9,8 @@ const initialState = {
   messages: [],
   messageText: '',
   friendsList: [],
-  selectedChatId: ''
+  selectedChatId: '',
+  chatObject: {},
 };
 
 // console.log('reducer message', actionTypes.SET_CHATS);
@@ -72,6 +73,7 @@ export default function reducer(state = initialState, action) {
     //     user: action.payload.username,
     //     email: action.payload.email,
     //   };
+
     case "USER_LOGOUT":
       return initialState;
     default:
