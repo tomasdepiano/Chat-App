@@ -6,10 +6,17 @@ const chats = Router();
 chats.post('/chats', async (req, res) => {
   try {
     const { senderId, receiverId } = req.body;
-    const newChat = new Chats({ senderId, receiverId });
+    const existingChat = await Chats.findOne({
+      where: { senderId, receiverId }
+    });
+    if (existingChat) {
+      res.status(200).json({ chatId: existingChat.chatId })
+    } else {
+      const newChat = new Chats({ senderId, receiverId });
 
-    await newChat.save();
-    res.status(200).json({ message: "chat created successfully" });
+      const newChatId = await newChat.save();
+      res.status(200).json({ chatId: newChatId.chatId });
+    }
   } catch (error) {
     console.log('Error:', error);
     res.status(500).json({ message: "chat creation failed" });

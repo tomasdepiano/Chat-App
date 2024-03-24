@@ -9,7 +9,7 @@ import axios from 'axios';
 import GroupMessageModal from '../modals/GroupMessageModal.jsx';
 import useOpenCloseModal from '../hooks/useOpenCloseModal.jsx';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchFriends } from '../redux/friendsActions.js';
+import { fetchFriends, setFriendUsername } from '../redux/friendsActions.js';
 import { setSelectedChatId, createChat } from '../redux/chatActions.js';
 const FriendsList = () => {
   const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
@@ -30,6 +30,7 @@ const FriendsList = () => {
   // console.log('friendsList from redux=>', friendsList);
   const chats = useSelector((state) => state.chats);
   const user = useSelector((state) => state.user);
+  const userId = useSelector((state) => state.userId);
 
   useEffect(() => {
     if (friendsList) {
@@ -42,21 +43,24 @@ const FriendsList = () => {
   const handleFriendClick = async (friend) => {
     console.log(chats);
     console.log(friend.userId);
+    dispatch(setFriendUsername(friend));
     const existingChat = chats.find((chat) => {
       // console.log(chat);
       // chat.users.includes(friend.userId);
       return chat.user.userId === friend.userId;
     });
     console.log(existingChat);
+    console.log('user in friendlist', user);
     if (existingChat) {
       dispatch(setSelectedChatId(existingChat.chatId));
     } else {
       //create new chat
       try {
         const response = await axios.post('/api/chats', {
-          users: [user.id, friend.userId],
+          senderId: userId,
+          receiverId: friend.userId,
         });
-        dispatch(createChat(response.data));
+        // dispatch(createChat(response.data));
         dispatch(setSelectedChatId(response.data.chatId));
       } catch (error) {
         console.error('Error createing chat:', error);

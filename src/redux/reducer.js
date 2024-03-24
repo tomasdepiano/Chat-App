@@ -7,6 +7,7 @@ const initialState = {
   isLoggedIn: false,
   chats: [],
   messages: [],
+
   messageText: '',
   friendsList: [],
   selectedChatId: '',
@@ -46,6 +47,7 @@ export default function reducer(state = initialState, action) {
         selectedChatId: action.payload,
       };
     case actionTypes.SET_MESSAGES:
+      console.log('setmessages', action.payload);
       return {
         ...state,
         messages: action.payload,
@@ -65,6 +67,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         friendsList: action.payload,
       };
+    case actionTypes.SET_FRIEND_USERNAME: {
+      return {
+        ...state,
+        friendUsername: action.payload.username
+      }
+    }
 
     // case 'SETTINGS_CHANGE_USER_NAME':
     //   return {
