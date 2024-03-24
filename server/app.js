@@ -10,7 +10,11 @@ import cors from "cors";
 const app = express();
 
 const ioServer = createServer(app);
-const io = new SocketIOServer(ioServer);
+const io = new SocketIOServer(ioServer, {
+  cors: {
+    origin: "*",
+  },
+});
 
 const port = "3500";
 const VitePort = "3501";
@@ -32,8 +36,12 @@ io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
   socket.on("send_message", (data) => {
-    socket.broadcast.emit("receive_message", data);
+    console.log(`Message received:${data}`);
+    io.emit("receive_message", data);
   });
+  // socket.on("disconnect", () => {
+  //   console.log(`User Disconnected:${socket.id}`);
+  // })
 });
 
 app.use(router); //use routes

@@ -1,69 +1,77 @@
 import React, { useEffect, useRef } from 'react';
-import Input from '../components/Input.jsx';
 import { useSelector, useDispatch } from 'react-redux';
+import Input from '../components/Input.jsx';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import CallImage from '../components/CallImage.jsx';
 import { fetchMessages, createMessage } from '../redux/messageActions.js';
 import { setSelectedChatId } from '../redux/chatActions.js';
 import axios from 'axios';
+import socket from '../socket.js';
 
 const Messages = () => {
   const dispatch = useDispatch();
   const messages = useSelector((state) => state.messages);
   const selectedChatId = useSelector((state) => state.selectedChatId);
-  const messageText = useSelector((state) => state.messageText);
+  // const messageText = useSelector((state) => state.messageText);
   const userId = useSelector((state) => state.userId);
   const user = useSelector((state) => state.user);
-  const newMessage = useRef(null);
+  const newMessageRef = useRef(null);
+  const friendsUsername = useSelector((state) => state.friendUsername);
   console.log('users in message.js:', user);
+
+  //socket io connection
+  // useEffect(() => {
+  //   socket.on('receive_message', (data) => {
+  //     console.log('New Message received:', data);
+  //   });
+  //   return () => {
+  //     socket.off('receive_message');
+  //   };
+  // }, []);
+
+  //useEffect to get the chat
   useEffect(() => {
     if (selectedChatId) {
       axios
         .get(`http://localhost:3501/api/messages/${selectedChatId}`)
         .then((res) => {
-          console.log('messages response:', res);
           dispatch(fetchMessages(res.data));
-        });
+        })
+        .catch((error) => console.error('Error fetching messages:', error));
       // Fetch messages for the selected chat
     }
   }, [selectedChatId, dispatch]);
 
-  // const handleSendMessage = (e) => {
-  //   e.preventDefault();
-  //   console.log('Message Text', messageText.trim());
-  //   if (messageText.trim()) {
-  //     console.log('MessageText:', messageText);
-  //     const message = {
-  //       chatId: selectedChatId,
-  //       // text: messageText,
-  //       senderId: userId,
-  //     };
-  //     dispatch(createMessage(message));
-  //     console.log('messages:', messages);
-  //     fetchMessages('');
-  //   }
-  // };
+  //useEffect to socket.io connection
+  useEffect(() => {
+    const handleMessageReceive = (data) => {
+      dispatch(createMessage(data));
+      socket.on('receive_message', handleMessageReceive);
+      return () => {
+        socket.off('receive_message', handleMessageReceive);
+      };
+    };
+  }, [dispatch]);
+
+  //handleSendMessage function
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    console.log({
-      chatId: selectedChatId,
-      senderId: userId,
-      // message: sendmessage, // Ensure this is the correct field name for the message content
-      // receiverId: ,
-      text: newMessage.current.value,
-    });
+    // console.log('chatI,senderId fetching:', {
+    //   chatId: selectedChatId,
+    //   senderId: userId,
+    //   text: newMessage.current.value,
+    // });
     try {
       const payload = {
-        chatId: messages?.chatId,
-        senderId: user?.id,
-        // message: sendmessage, // Ensure this is the correct field name for the message content
+        chatId: selectedChatId,
+        senderId: userId,
         receiverId: messages?.receiver?.receiverId,
-        text: newMessage.current.value,
+        text: newMessageRef.current.value,
       };
 
-      const response = await axios.post('/api/message', payload);
-      console.log('resData:>>', response.data);
-      handleSendMessage(''); // Clear the input field after sending the message
+      await axios.post('/api/message', payload);
+      socket.emit('send_message', payload);
+      newMessageRef.current.value = '';
     } catch (error) {
       console.error('Error sending message:', error);
     }
@@ -81,7 +89,7 @@ const Messages = () => {
           />
         </div>
         <div>
-          <h3 className=" text-lg font-medium">User Name</h3>
+          <h3 className=" text-lg font-medium">{friendsUsername}</h3>
         </div>
         {/* call button */}
         <div>
@@ -117,11 +125,11 @@ const Messages = () => {
       <div className="fixed bottom-2 w-[25%] flex items-center ">
         <Input
           className=" w-[95%]  ml-1.5 border  "
-          placeholder={`message ${user.username} here...`}
+          placeholder={`message ${user} here...`}
           type="text"
           required
           // onChange={(e) => setSendMessage(e.target.value)}
-          newMessage={newMessage}
+          newMessage={newMessageRef}
         />
         <div className="w-[10%]">
           <button className="w-full" onClick={(e) => handleSendMessage(e)}>

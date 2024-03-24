@@ -6,6 +6,7 @@ import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import axios from 'axios';
 import { fetchChats, setSelectedChatId } from '../redux/chatActions.js';
 import { fetchMessages } from '../redux/messageActions.js';
+import { setFriendUsername } from '../redux/friendsActions.js';
 const Chats = () => {
   const user = useSelector((state) => state.user);
   const userId = useSelector((state) => state.userId);
@@ -77,8 +78,9 @@ const Chats = () => {
     }
   }, [userId, dispatch]);
 
-  const handleChatClick = (chatId) => {
+  const handleChatClick = (chatId, user) => {
     dispatch(setSelectedChatId(chatId));
+    dispatch(setFriendUsername(user));
   };
 
   return (
@@ -106,7 +108,7 @@ const Chats = () => {
             <button
               key={chat.chatId}
               className=" justify-center hover:font-bold"
-              onClick={() => handleChatClick(chat.chatId)}
+              onClick={() => handleChatClick(chat.chatId, chat.user)}
             >
               Conversation with {chat.user.username}
             </button>

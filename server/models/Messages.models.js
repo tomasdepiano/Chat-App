@@ -17,12 +17,23 @@ Messages.init(
     },
     userId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'users',//model should match the table name for the users
+        key: 'userId',
+      }
     },
     chatId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'chats',
+        key: 'chatId',
+      }
     },
     message: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {
