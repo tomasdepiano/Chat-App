@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import { User, Chats } from '../models/index.js';
+import { Op } from 'sequelize';
+
 
 const getChats = Router();
 
@@ -7,31 +9,22 @@ const getChats = Router();
 
 getChats.get('/chats/:userId', async (req, res) => {
   try {
-    const userId = req.params.userId;
-    console.log('userId params:', userId);
+    const userId = +req.params.userId;
+    console.log('userId params:', +userId);
     //to find chats where userId is either senderId or receiverId
     const chats = await Chats.findAll({
-      $or: [{ senderId: userId }, { receiverId: userId }],
+      where: {
+        [Op.or]: [{ senderId: userId }, { receiverId: userId }]
+      }
     });
-    console.log(chats);
     if (!chats) {
       res.send([]); //empty array: no messages found
     }
     const chatUserData = await Promise.all(
       chats.map(async (chat) => {
         //Assuming receiverId is an array and you're looking for first one that isn't the userId
-        let chattedId;
-        if (chat.senderId !== userId) {
-          console.log('if invoked');
-          chattedId = chat.senderId;
-        } else {
-          console.log('else invoked');
-
-          chattedId = chat.receiverId;
-        }
-        console.log('chattedId', chattedId);
+        let chattedId = chat.senderId === +userId ? chat.receiverId : chat.senderId;
         const user = await User.findOne({ where: { userId: chattedId } });
-        console.log('user in chats', user);
         return {
           user: {
             email: user?.email,
@@ -40,8 +33,7 @@ getChats.get('/chats/:userId', async (req, res) => {
           },
           chatId: chat.chatId
         };
-      })
-    );
+      }));
     //sending the chat user data as a response
     res.json(chatUserData);
   } catch (error) {

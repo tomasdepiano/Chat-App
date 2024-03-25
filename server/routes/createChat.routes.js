@@ -14,8 +14,8 @@ chats.post('/chats', async (req, res) => {
     } else {
       const newChat = new Chats({ senderId, receiverId });
 
-      const newChatId = await newChat.save();
-      res.status(200).json({ chatId: newChatId.chatId });
+      await newChat.save();
+      res.status(200).json({ chatId: newChat.chatId });
     }
   } catch (error) {
     console.log('Error:', error);

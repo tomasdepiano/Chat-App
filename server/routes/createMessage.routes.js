@@ -9,7 +9,7 @@ createMessageRouter.post('/message', async (req, res) => {
 
     const { chatId, senderId, text } = req.body;
 
-    if (!senderId || !text || !chatId) {
+    if (!chatId || !senderId || !text) {
       console.log('hit 400')
       return res.status(400).json({ message: "Please fill all required fields" }) // need to fill both senderId and message text
     }
