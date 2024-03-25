@@ -46,10 +46,14 @@ const Messages = () => {
   useEffect(() => {
     const handleMessageReceive = (data) => {
       dispatch(createMessage(data));
-      socket.on('receive_message', handleMessageReceive);
-      return () => {
-        socket.off('receive_message', handleMessageReceive);
-      };
+    };
+
+    // Listen for 'receive_message' event and handle it with handleMessageReceive
+    socket.on('receive_message', handleMessageReceive);
+
+    // Return a cleanup callback to turn off the event listener when the component unmounts
+    return () => {
+      socket.off('receive_message', handleMessageReceive);
     };
   }, [dispatch]);
 
@@ -67,14 +71,25 @@ const Messages = () => {
         senderId: userId,
         receiverId: messages?.receiver?.receiverId,
         text: newMessageRef.current.value,
+        message: newMessageRef.current.value,
       };
 
       await axios.post('/api/message', payload);
       socket.emit('send_message', payload);
       newMessageRef.current.value = '';
+      fetchUpdatedMessages();
     } catch (error) {
       console.error('Error sending message:', error);
     }
+  };
+
+  const fetchUpdatedMessages = () => {
+    axios
+      .get(`http://localhost:3501/api/messages/${selectedChatId}`)
+      .then((res) => {
+        dispatch(fetchMessages(res.data));
+      })
+      .catch((error) => console.error('Error fetching messages:', error));
   };
 
   return (

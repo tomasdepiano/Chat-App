@@ -53,6 +53,7 @@ export default function reducer(state = initialState, action) {
         messages: action.payload,
       }
     case actionTypes.ADD_MESSAGES:
+      console.log('state messages', ...state.messages);
       return {
         ...state,
         messages: [...state.messages, action.payload],
