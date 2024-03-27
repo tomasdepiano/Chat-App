@@ -6,9 +6,10 @@ import router from "./routes/index.js";
 import { createServer } from "http";
 import { Server as SocketIOServer } from "socket.io";
 import cors from "cors";
-
 const app = express();
 
+import dotenv from 'dotenv';
+dotenv.config();
 const ioServer = createServer(app);
 const io = new SocketIOServer(ioServer, {
   cors: {

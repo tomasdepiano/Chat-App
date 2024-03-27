@@ -20,7 +20,7 @@ Messages.init(
       allowNull: false,
       references: {
         model: 'users',//model should match the table name for the users
-        key: 'userId',
+        key: 'user_id',
       }
     },
     chatId: {
@@ -28,7 +28,7 @@ Messages.init(
       allowNull: false,
       references: {
         model: 'chats',
-        key: 'chatId',
+        key: 'chat_id',
       }
     },
     message: {

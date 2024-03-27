@@ -1,10 +1,12 @@
 
-import { CREATE_CHAT, SELECTED_CHATID, SET_CHATS } from './actionTypes';
-// import * as actionTypes from './actionTypes';
+//chat actions
+export const SET_CHATS = 'SET_CHATS';
+export const ADD_CHAT = 'ADD_CHAT';
+export const SELECTED_CHATID = 'SELECTED_CHATID';
+export const CREATE_CHAT = 'CREATE_CHAT';
 
 // Action creator for fetching chats
 export const fetchChats = (chats) => {
-
   return {
     type: SET_CHATS,
     payload: chats,

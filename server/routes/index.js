@@ -7,7 +7,8 @@ import getMessages from "./getMessages.routes.js";
 import getChats from "./getChat.routes.js";
 import allUsersRoutes from "./allUsers.routes.js";
 import userSettingsRouter from "./userSettings.routes.js";
-
+import dotenv from 'dotenv';
+dotenv.config();
 const router = Router();
 
 router.use("/api", createAcountRoutes);

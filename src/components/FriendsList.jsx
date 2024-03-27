@@ -1,21 +1,28 @@
 import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {
+  fetchFriends,
+  setFriendUsername,
+} from '../redux/actions/friendsActions.js';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Logout from '../components/Logout.jsx';
 import Settings from '../components/Settings.jsx';
-import { useNavigate } from 'react-router-dom';
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
-import axios from 'axios';
 import GroupMessageModal from '../modals/GroupMessageModal.jsx';
 import useOpenCloseModal from '../hooks/useOpenCloseModal.jsx';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchFriends, setFriendUsername } from '../redux/friendsActions.js';
-import { setSelectedChatId, createChat } from '../redux/chatActions.js';
+import axios from 'axios';
+import { setSelectedChatId, createChat } from '../redux/actions/chatActions.js';
+import UserIcon from './UserIcon.jsx';
+//friendsList component
 const FriendsList = () => {
   const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
-
-  // const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const friendsList = useSelector((state) => state.friend.friendsList);
+  const chats = useSelector((state) => state.chat.chats);
+  const userId = useSelector((state) => state.user.userId);
 
   function SettingsPageResponsive() {
     navigate('/settings2');
@@ -25,32 +32,19 @@ const FriendsList = () => {
     navigate('/');
   }
 
-  const dispatch = useDispatch();
-  const friendsList = useSelector((state) => state.friendsList);
-  // console.log('friendsList from redux=>', friendsList);
-  const chats = useSelector((state) => state.chats);
-  const user = useSelector((state) => state.user);
-  const userId = useSelector((state) => state.userId);
-
   useEffect(() => {
     if (friendsList) {
       axios.get('/api/allUsers').then((res) => {
-        console.log('friends list:', res);
         dispatch(fetchFriends(res.data));
       });
     }
   }, [dispatch]);
+
   const handleFriendClick = async (friend) => {
-    console.log('chats in friendlist', chats);
-    console.log('friend', friend.userId);
     dispatch(setFriendUsername(friend));
     const existingChat = chats.find((chat) => {
-      // console.log(chat);
-      // chat.users.includes(friend.userId);
       return chat.user.userId === friend.userId;
     });
-    console.log('existing chat', existingChat);
-    console.log('user in friendlist', user);
     if (existingChat) {
       dispatch(setSelectedChatId(existingChat.chatId));
     } else {
@@ -88,18 +82,23 @@ const FriendsList = () => {
         Friends List
       </div>
       <div className="text-white p-10 text-xl">
-        {friendsList.map((friend) => {
-          // console.log('friendsList:', friend);
-          return (
-            <div
-              key={friend.userId}
-              className=" m-2 cursor-pointer hover:font-bold "
-              onClick={() => handleFriendClick(friend)}
-            >
-              {friend.username}
-            </div>
-          );
-        })}
+        {/* code for rendering component */}
+        {friendsList && friendsList.length > 0 ? (
+          friendsList.map((friend) => {
+            return (
+              <div
+                key={friend.userId}
+                className=" m-2 cursor-pointer hover:font-bold flex p-2"
+                onClick={() => handleFriendClick(friend)}
+              >
+                <UserIcon className="ml-2" userId={friend.userId} />
+                <span className="ml-2"> {friend.username}</span>
+              </div>
+            );
+          })
+        ) : (
+          <div>No Friends Found.</div>
+        )}
       </div>
       <div className="fixed bottom-[0.5%]">
         {/* responsivepage icons for settings&logout */}
