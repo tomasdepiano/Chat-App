@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Input from '../components/Input.jsx';
-import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
-import CallImage from '../components/CallImage.jsx';
-import { fetchMessages, createMessage } from '../redux/messageActions.js';
-import { setSelectedChatId } from '../redux/chatActions.js';
-import axios from 'axios';
-import socket from '../socket.js';
+import React, { useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Input from "../components/Input.jsx";
+import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
+import CallImage from "../components/CallImage.jsx";
+import { fetchMessages, createMessage } from "../redux/messageActions.js";
+import { setSelectedChatId } from "../redux/chatActions.js";
+import axios from "axios";
+import socket from "../socket.js";
 
 const Messages = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Messages = () => {
   const user = useSelector((state) => state.user);
   const newMessageRef = useRef(null);
   const friendsUsername = useSelector((state) => state.friendUsername);
-  console.log('users in message.js:', user);
+  console.log("users in message.js:", user);
 
   //socket io connection
   // useEffect(() => {
@@ -37,7 +37,7 @@ const Messages = () => {
         .then((res) => {
           dispatch(fetchMessages(res.data));
         })
-        .catch((error) => console.error('Error fetching messages:', error));
+        .catch((error) => console.error("Error fetching messages:", error));
       // Fetch messages for the selected chat
     }
   }, [selectedChatId, dispatch]);
@@ -49,11 +49,12 @@ const Messages = () => {
     };
 
     // Listen for 'receive_message' event and handle it with handleMessageReceive
-    socket.on('receive_message', handleMessageReceive);
+    socket.on("receive_message", handleMessageReceive);
 
     // Return a cleanup callback to turn off the event listener when the component unmounts
     return () => {
-      socket.off('receive_message', handleMessageReceive);
+      // socket.off('receive_message', handleMessageReceive);
+      socket.disconnect();
     };
   }, [dispatch]);
 
@@ -74,12 +75,12 @@ const Messages = () => {
         message: newMessageRef.current.value,
       };
 
-      await axios.post('/api/message', payload);
-      socket.emit('send_message', payload);
-      newMessageRef.current.value = '';
+      await axios.post("/api/message", payload);
+      socket.emit("send_message", payload);
+      newMessageRef.current.value = "";
       fetchUpdatedMessages();
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error("Error sending message:", error);
     }
   };
 
@@ -89,7 +90,7 @@ const Messages = () => {
       .then((res) => {
         dispatch(fetchMessages(res.data));
       })
-      .catch((error) => console.error('Error fetching messages:', error));
+      .catch((error) => console.error("Error fetching messages:", error));
   };
 
   return (
@@ -122,8 +123,8 @@ const Messages = () => {
                 key={msg.messageId}
                 className={`max-w-[40%] rounded-b-xl p-4 mb-6 ${
                   userId === msg.userId
-                    ? 'bg-orange-400 text-white rounded-tl-xl ml-auto'
-                    : 'bg-blue-400 rounded-tr-xl'
+                    ? "bg-orange-400 text-white rounded-tl-xl ml-auto"
+                    : "bg-blue-400 rounded-tr-xl"
                 }`}
               >
                 {msg.message}
