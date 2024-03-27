@@ -37,7 +37,7 @@ const usersInDB = await Promise.all(
     const newMessage = await Messages.create({
       userId: newUser.userId,
       chatId: newChat.chatId,
-      message: "message",
+      message: "Hello,World!",
     });
 
     return { newUser, newChat, newMessage };

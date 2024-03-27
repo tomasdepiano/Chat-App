@@ -23,6 +23,7 @@ export default function LoginPage() {
     console.log(res);
     if (res.data.success) {
       console.log('user login response:', res.data);
+      localStorage.setItem('token', res.data.token); //store the token
       dispatch({
         type: 'USER_LOGIN',
         payload: {

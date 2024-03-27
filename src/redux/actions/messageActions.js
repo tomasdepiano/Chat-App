@@ -1,5 +1,8 @@
-// import axios from 'axios';
-import { SET_MESSAGES, ADD_MESSAGES } from './actionTypes';
+
+//message actons
+export const SET_MESSAGES = 'SET_MESSAGES';
+export const ADD_MESSAGES = 'ADD_MESSAGES';
+export const CREATE_MESSAGES = 'CREATE_MESSAGES';
 
 //getting messages
 export const fetchMessages = (messages) => {

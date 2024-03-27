@@ -7,7 +7,7 @@ const Logout = () => {
   const dispatch = useDispatch();
   const handleLogout = () => {
     //dispatching the logout action
-    dispatch({ type: 'USER_LOG_OUT' });
+    dispatch({ type: 'USER_LOGOUT' });
     navigate('/');
   };
   return (

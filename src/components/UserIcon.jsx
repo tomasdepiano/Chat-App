@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 const tailwindColors = [
   'bg-red-500',
   'bg-pink-500',
@@ -26,9 +25,11 @@ const getRandomColorClass = () => {
   return tailwindColors[randomIndex];
 };
 
-const UserIcon = () => {
-  const username = useSelector((state) => state.user);
-  const firstLetter = username ? username[0].toUpperCase() : '?';
+const UserIcon = ({ userId }) => {
+  const friends = useSelector((state) => state.friend.friendsList);
+  const username = friends.find((user) => user.userId === userId);
+
+  const firstLetter = username ? username.username[0].toUpperCase() : '?';
   const iconColorClass = getRandomColorClass();
   return (
     <div
