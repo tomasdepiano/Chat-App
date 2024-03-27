@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchChats, setSelectedChatId } from '../redux/actions/chatActions.js';
 // import { setFriendUsername } from '../redux/actions/friendsActions.js';
+
 import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import axios from 'axios';
 import UserIcon from './UserIcon.jsx';
