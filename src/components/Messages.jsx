@@ -142,11 +142,11 @@ const Messages = () => {
                   {userId !== msg.userId && <UserIcon userId={msg.userId} />}
 
                   <div
-                    className={`max-w-[80%] rounderd-b-xl p-4 mb-6
+                    className={`max-w-[80%] rounderd-b-xl p-4 mb-6 
           ${
             userId === msg.userId
-              ? 'bg-orange-400 text-white rounded-tl-xl ml-auto'
-              : 'bg-blue-400 text-white rounded-tr-xl'
+              ? 'bg-orange-400 text-white rounded-tl-xl mr-2'
+              : 'bg-blue-400 text-white rounded-tr-xl ml-2 '
           }`}
                   >
                     {msg.message}
