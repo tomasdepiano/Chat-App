@@ -49,8 +49,8 @@ const Messages = () => {
     socket.on('receive_message', handleMessageReceive);
     // Return a cleanup callback to turn off the event listener when the component unmounts
     return () => {
-      // socket.off('receive_message', handleMessageReceive);
-      socket.disconnect();
+      socket.off('receive_message', handleMessageReceive);
+      // socket.disconnect();
     };
   }, [dispatch]);
 
