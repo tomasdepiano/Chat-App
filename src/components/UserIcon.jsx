@@ -6,7 +6,6 @@ const tailwindColors = [
   'bg-pink-500',
   'bg-purple-500',
   'bg-deep-purple-500',
-  'bg-indigo-500',
   'bg-teal-500',
   'bg-green-500',
   'bg-light-green-500',
@@ -15,9 +14,6 @@ const tailwindColors = [
   'bg-amber-500',
   'bg-orange-500',
   'bg-brown-500',
-  'bg-grey-500',
-  'bg-blue-grey-500',
-
 ];
 const getRandomColorClass = (letter) => {
   const randomIndex = Math.floor(letter.charCodeAt(0)) % tailwindColors.length;

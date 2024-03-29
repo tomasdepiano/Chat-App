@@ -65,8 +65,11 @@ const FriendsList = () => {
   return (
     <div className="w-1/4 flex-none  ">
       <div className="lg:mt-10 lg:ml-10 text-white lg:text-xl lg:w-[80%] lg:flex lg:justify-between  xxs:hidden ">
-        <div className="border-2 border-red-400 rounded-lg hover:bg-gray-400 text-black bg-gray-100">
+        {/* <div className="border-2 border-red-400 rounded-lg hover:bg-gray-400 text-black bg-gray-100">
           <button>Add Friend</button>
+        </div> */}
+        <div className="text-xl flex justify-center text-white font-bold p-2">
+          Friends List
         </div>
         <button
           title="Group Chat"
@@ -78,10 +81,15 @@ const FriendsList = () => {
         </button>
         <GroupMessageModal onClose={closeModal} visible={showModal} />
       </div>
+
+
+      <div className="text-white p-10 text-xl">
+
       <div className="lg:text-xl lg:flex lg:justify-center lg:text-white lg:p-2 md: hidden">
         Friends List
       </div>
       <div className="text-white p-10 text-xl xxs:hidden lg:inline-block">
+
         {/* code for rendering component */}
         {friendsList && friendsList.length > 0 ? (
           friendsList.map((friend) => {
@@ -103,9 +111,9 @@ const FriendsList = () => {
       <div className="fixed bottom-[0.5%]">
         {/* responsivepage icons for settings&logout */}
         <div>
-          <button className="lg:hidden fixed top-10 border-2 border-red-400 rounded-lg text-black bg-gray-100 ">
+          {/* <button className="lg:hidden fixed top-10 border-2 border-red-400 rounded-lg text-black bg-gray-100 ">
             Add Friend
-          </button>
+          </button> */}
           <button
             onClick={SettingsPageResponsive}
             className="lg:hidden fixed top-12 ml-20 text-white"

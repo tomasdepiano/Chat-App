@@ -1,19 +1,37 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchChats, setSelectedChatId } from "../redux/actions/chatActions.js";
-import { useNavigate } from "react-router-dom";
-import MapsUgcOutlinedIcon from "@mui/icons-material/MapsUgcOutlined";
-import axios from "axios";
-import UserIcon from "./UserIcon.jsx";
 
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchChats, setSelectedChatId } from '../redux/actions/chatActions.js';
+// import { setFriendUsername } from '../redux/actions/friendsActions.js';
+import useOpenCloseModal from '../hooks/useOpenCloseModal.jsx';
+import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
+import AddFriendModal from '../modals/AddFriendModal.jsx';
+import axios from 'axios';
+import UserIcon from './UserIcon.jsx';
+import {
+  fetchFriends,
+  setFriendUsername,
+} from '../redux/actions/friendsActions.js';
 
 //Chats component
 const Chats = () => {
+  const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
   const user = useSelector((state) => state.user.user);
   const userId = useSelector((state) => state.user.userId);
   const chats = useSelector((state) => state.chat.chats);
-  const navigate = useNavigate();
+
+  const friendsList = useSelector((state) => state.friend.friendsList);
+
+
   const dispatch = useDispatch();
+  // grabing all users
+  useEffect(() => {
+    if (friendsList) {
+      axios.get('/api/allUsers').then((res) => {
+        dispatch(addAllUsers(res.data));
+      });
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     if (userId) {
@@ -22,6 +40,9 @@ const Chats = () => {
       });
     }
   }, [userId, dispatch]);
+
+
+  const handleChatClick = (chatId, friend) => {
 
   function screenSize() {
     const width = window.innerWidth;
@@ -33,7 +54,7 @@ const Chats = () => {
 
   const handleChatClick = (chatId, user) => {
     dispatch(setSelectedChatId(chatId));
-    // dispatch(setFriendUsername(user));
+    dispatch(setFriendUsername(friend));
   };
 
   return (
@@ -51,6 +72,7 @@ const Chats = () => {
           >
             <MapsUgcOutlinedIcon fontSize="large" />
           </button>
+          <AddFriendModal onClose={closeModal} visible={showModal} />
         </div>
         {/* <NewMessageModal onClose={closeModal} visible={showModal} /> */}
       </div>
@@ -70,7 +92,19 @@ const Chats = () => {
               }}
               className=" lg:justify-center lg:hover:font-bold xxs:justify-center xxs:p-5"
             >
+
+              <div className=" flex justify-center text-center ">
+                <UserIcon
+                  className=" mr-2 flex justify-center text-center"
+                  userId={chat.user.username}
+                />
+                <span className=" ml-2 flex justify-center text-center">
+                  Conversation with {chat.user.username}
+                </span>
+              </div>
+
               Conversation with {chat.user.username}{" "}
+
             </button>
           ))
         ) : (

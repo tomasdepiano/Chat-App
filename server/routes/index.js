@@ -7,6 +7,8 @@ import getMessages from "./getMessages.routes.js";
 import getChats from "./getChat.routes.js";
 import allUsersRoutes from "./allUsers.routes.js";
 import userSettingsRouter from "./userSettings.routes.js";
+import createFriendRouter from "./createFriend.routes.js";
+import getFriendsRoute from "./getFriends.routes.js";
 import dotenv from 'dotenv';
 dotenv.config();
 const router = Router();
@@ -19,5 +21,7 @@ router.use("/api", getMessages);
 router.use("/api", getChats);
 router.use("/api", allUsersRoutes);
 router.use("/api", userSettingsRouter);
+router.use("/api", createFriendRouter);
+router.use("/api", getFriendsRoute);
 
 export default router;
