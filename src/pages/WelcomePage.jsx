@@ -1,6 +1,6 @@
-import Chats from '../components/Chats.jsx';
-import Messages from '../components/Messages.jsx';
-import FriendsList from '../components/FriendsList.jsx';
+import Chats from "../components/Chats.jsx";
+import Messages from "../components/Messages.jsx";
+import FriendsList from "../components/FriendsList.jsx";
 
 export default function WelcomePage() {
   return (

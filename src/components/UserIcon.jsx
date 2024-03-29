@@ -1,6 +1,7 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { useSelector } from "react-redux";
 const tailwindColors = [
+
   'bg-red-500',
   'bg-pink-500',
   'bg-purple-500',
@@ -16,6 +17,7 @@ const tailwindColors = [
   'bg-brown-500',
   'bg-grey-500',
   'bg-blue-grey-500',
+
 ];
 const getRandomColorClass = (letter) => {
   const randomIndex = Math.floor(letter.charCodeAt(0)) % tailwindColors.length;
@@ -26,6 +28,10 @@ const UserIcon = ({ userId }) => {
   const friends = useSelector((state) => state.friend.friendsList);
   const username = friends.find((user) => user.userId === userId);
 
+
+  const firstLetter = username ? username.username[0].toUpperCase() : "?";
+  const iconColorClass = getRandomColorClass();
+
   const firstLetter = username ? username.username[0].toUpperCase() : '?';
   let iconColorClass;
   if (firstLetter) {
@@ -33,6 +39,7 @@ const UserIcon = ({ userId }) => {
   } else {
     iconColorClass = tailwindColors[0];
   }
+
   return (
     <div
       className={`user-icon ${iconColorClass} flex items-center justify-center rounded-full h-10 w-10 text-white`}

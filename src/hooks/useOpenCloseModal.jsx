@@ -1,5 +1,4 @@
-import { set } from 'lodash';
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function useOpenCloseModal(prop) {
   const [showModal, setShowModal] = useState(prop);

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import useOpenCloseModal from '../hooks/useOpenCloseModal';
-import ChangeUserName from '../modals/ChangeUserName';
-import ChangePassWord from '../modals/ChangePassword';
-import ChangeEmail from '../modals/ChangeEmail';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import useOpenCloseModal from "../hooks/useOpenCloseModal";
+import ChangeUserName from "../modals/ChangeUserName";
+import ChangePassWord from "../modals/ChangePassword";
+import ChangeEmail from "../modals/ChangeEmail";
 
 function SettingsPage() {
   const [changeUserName, setChangeUserName, closeUserName] =
@@ -13,7 +13,7 @@ function SettingsPage() {
   const [changeEmail, setChangeEmail, closeEmail] = useOpenCloseModal(false);
   const user = useSelector((state) => state.user.user);
   const email = useSelector((state) => state.user.email);
-  console.log('user', user);
+  // console.log('user', user);
 
   // //to put user info inplace of login
   // useEffect(() => {

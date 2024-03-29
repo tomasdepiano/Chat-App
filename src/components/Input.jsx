@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function Input({
   label,
@@ -34,6 +34,7 @@ export const ModalInputs = ({
   onChange,
   placeholder,
   className,
+  type,
 }) => {
   return (
     <div className="flex items-center w-96">
@@ -43,6 +44,7 @@ export const ModalInputs = ({
         onChange={onChange}
         value={value}
         placeholder={placeholder}
+        type={type}
       />
     </div>
   );
