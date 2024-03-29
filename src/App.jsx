@@ -59,8 +59,6 @@ export default function App() {
   }, [dispatch]);
   return (
     <>
-      {/* <ParticlesBackground /> */}
-
       <RouterProvider router={router} />
     </>
   );

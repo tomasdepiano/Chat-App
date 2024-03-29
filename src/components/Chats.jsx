@@ -6,6 +6,7 @@ import MapsUgcOutlinedIcon from "@mui/icons-material/MapsUgcOutlined";
 import axios from "axios";
 import UserIcon from "./UserIcon.jsx";
 
+
 //Chats component
 const Chats = () => {
   const user = useSelector((state) => state.user.user);
