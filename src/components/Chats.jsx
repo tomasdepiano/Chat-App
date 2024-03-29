@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchChats, setSelectedChatId } from '../redux/actions/chatActions.js';
-// import { setFriendUsername } from '../redux/actions/friendsActions.js';
-import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
-import axios from 'axios';
-import UserIcon from './UserIcon.jsx';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchChats, setSelectedChatId } from "../redux/actions/chatActions.js";
+import { useNavigate } from "react-router-dom";
+import MapsUgcOutlinedIcon from "@mui/icons-material/MapsUgcOutlined";
+import axios from "axios";
+import UserIcon from "./UserIcon.jsx";
+
 //Chats component
 const Chats = () => {
   const user = useSelector((state) => state.user.user);
   const userId = useSelector((state) => state.user.userId);
   const chats = useSelector((state) => state.chat.chats);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,6 +21,14 @@ const Chats = () => {
       });
     }
   }, [userId, dispatch]);
+
+  function screenSize() {
+    const width = window.innerWidth;
+
+    if (width < 1024) {
+      navigate("/welcome2");
+    }
+  }
 
   const handleChatClick = (chatId, user) => {
     dispatch(setSelectedChatId(chatId));
@@ -44,17 +54,22 @@ const Chats = () => {
         {/* <NewMessageModal onClose={closeModal} visible={showModal} /> */}
       </div>
       {/* division for Chats Title */}
-      <h2 className=" flex justify-center  mt-8 mb-6">Chats</h2>
+      <h2 className=" lg:flex lg:justify-center  lg:mt-8 lg:mb-6 xxs:hidden">
+        Chats
+      </h2>
       {/* Division for showing conversations */}
       <div className="text-white font-bold p-5 h-[80%] mt-8 overflow-y-auto flex flex-col  space-y-5">
         {chats.length > 0 ? (
           chats.map((chat) => (
             <button
               key={chat.chatId}
-              onClick={() => handleChatClick(chat.chatId, chat.user)}
-              className=" justify-center hover:font-bold"
+              onClick={() => {
+                handleChatClick(chat.chatId, chat.user);
+                screenSize();
+              }}
+              className=" lg:justify-center lg:hover:font-bold xxs:justify-center xxs:p-5"
             >
-              Conversation with {chat.user.username}
+              Conversation with {chat.user.username}{" "}
             </button>
           ))
         ) : (
