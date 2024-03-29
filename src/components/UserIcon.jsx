@@ -6,9 +6,6 @@ const tailwindColors = [
   'bg-purple-500',
   'bg-deep-purple-500',
   'bg-indigo-500',
-  'bg-blue-500',
-  'bg-light-blue-500',
-  'bg-cyan-500',
   'bg-teal-500',
   'bg-green-500',
   'bg-light-green-500',
@@ -20,8 +17,8 @@ const tailwindColors = [
   'bg-grey-500',
   'bg-blue-grey-500',
 ];
-const getRandomColorClass = () => {
-  const randomIndex = Math.floor(Math.random() * tailwindColors.length);
+const getRandomColorClass = (letter) => {
+  const randomIndex = Math.floor(letter.charCodeAt(0)) % tailwindColors.length;
   return tailwindColors[randomIndex];
 };
 
@@ -30,7 +27,12 @@ const UserIcon = ({ userId }) => {
   const username = friends.find((user) => user.userId === userId);
 
   const firstLetter = username ? username.username[0].toUpperCase() : '?';
-  const iconColorClass = getRandomColorClass();
+  let iconColorClass;
+  if (firstLetter) {
+    iconColorClass = getRandomColorClass(firstLetter);
+  } else {
+    iconColorClass = tailwindColors[0];
+  }
   return (
     <div
       className={`user-icon ${iconColorClass} flex items-center justify-center rounded-full h-10 w-10 text-white`}
