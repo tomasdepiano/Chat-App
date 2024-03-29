@@ -2,6 +2,7 @@ import { db } from "../config/db.js";
 import User from "../models/User.model.js";
 import Chats from "../models/Chats.model.js";
 import Messages from "../models/Messages.models.js";
+import Friendships from "../models/Friendships.model.js";
 import UserData from "./data/seed.json" assert { type: "json" };
 import bcrypt from 'bcrypt';
 console.log("Syncing Database");
@@ -40,7 +41,14 @@ const usersInDB = await Promise.all(
       message: "Hello,World!",
     });
 
-    return { newUser, newChat, newMessage };
+    const newFriendship = await Friendships.create({
+      userId: newUser.userId,
+      friendId: newUser.friendId,
+
+    })
+
+
+    return { newUser, newChat, newMessage, newFriendship };
   })
 );
 

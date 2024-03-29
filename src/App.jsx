@@ -1,14 +1,12 @@
-import { Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
 import LoginPage from './pages/LoginPage.jsx';
 import SettingsPage from './pages/SettingsPage.jsx';
 import WelcomePage from './pages/WelcomePage.jsx';
-import ParticlesBackground from './components/ParticlesBackground.jsx';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import SettingsPageResponsive from './pages/Responsive/SettingsPageResponsive.jsx';
-import { USER_LOGIN } from './redux/actions/userActions.js';
+import { setUser } from './redux/actions/userActions.js';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -30,35 +28,18 @@ const router = createBrowserRouter([
 
 export default function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     async function checkUser() {
-      const token = localStorage.getItem('token');
-      if (token) {
-        try {
-          const res = await axios.post('/api/checkUser', {
-            headers: { authorization: token },
-          });
-          if (res.data.success) {
-            dispatch({
-              type: 'USER_LOGIN',
-              payload: {
-                username: res.data.username,
-                email: res.data.email,
-                id: res.data.userId,
-              },
-            });
-          }
-        } catch (error) {
-          console.error('Error checking user:', error);
-        }
+      const res = await axios.post('/api/checkUser');
+      if (res.data.success) {
+        dispatch(setUser(res.data));
       }
     }
     checkUser();
   }, [dispatch]);
   return (
     <>
-      {/* <ParticlesBackground /> */}
-
       <RouterProvider router={router} />
     </>
   );

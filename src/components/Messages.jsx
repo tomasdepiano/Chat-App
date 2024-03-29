@@ -107,28 +107,6 @@ const Messages = () => {
         </div>
       </div>
       {/* messages display area */}
-      {/* <div className=" h-[80%] mt-8 w-full  border-b overflow-y-auto">
-        <div className="p-14">
-          {messages.length > 0 ? (
-            messages.map((msg) => (
-              <div
-                key={msg.messageId}
-                className={`max-w-[40%] rounded-b-xl p-4 mb-6 ${
-                  userId === msg.userId
-                    ? 'bg-orange-400 text-white rounded-tl-xl ml-auto'
-                    : 'bg-blue-400 rounded-tr-xl'
-                }`}
-              >
-                {msg.message}
-              </div>
-            ))
-          ) : (
-            <div className="text-center text-lg font-semibold mt-24">
-              No Messages or No Conversation Selected
-            </div>
-          )}
-        </div>
-      </div> */}
       <div className="h-[80%] mt-8 w-full  border-b overflow-y-auto">
         <div className="p-14">
           {messages.length > 0 ? (
@@ -164,9 +142,9 @@ const Messages = () => {
       </div>
 
       {/* input for message */}
-      <div className="fixed bottom-2 w-[25%] flex items-center ">
+      <div className="fixed bottom-2  flex items-center w-96 ">
         <Input
-          className=" w-[95%]  ml-1.5 border  "
+          className=" w-[100%]  ml-1.5 border  "
           placeholder={`message ${user.username} here...`}
           type="text"
           required
