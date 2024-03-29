@@ -85,6 +85,7 @@ export default function CreateAccountModal({ visible, onClose }) {
               label="Password:"
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Type here"
+              type="password"
             />
           </div>
           <div className="mt-4">

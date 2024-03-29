@@ -6,10 +6,11 @@ import ChangeEmail from "../../modals/ChangeEmail";
 import ChangePassWord from "../../modals/ChangePassword";
 import { useNavigate } from "react-router-dom";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+// import bcrypt from "bcrypt";
 
 function SettingsButton() {
-  const user = useSelector((state) => state.user);
-  const email = useSelector((state) => state.email);
+  const user = useSelector((state) => state.user.user);
+  const email = useSelector((state) => state.user.email);
   const [changeUserName, setChangeUserName, closeUserName] =
     useOpenCloseModal(false);
   const [changePassWord, setChangePassWord, closePassword] =
@@ -33,7 +34,7 @@ function SettingsButton() {
         <div className=" xxs:mt-10 xxs:ml-[40%] xxs:justify-center xxs:text-white">
           {" "}
           Hello,{" "}
-          <span className="font-bold text-2xl text-red-700">{user} !</span>
+          <span className="font-bold text-2xl text-red-700"> {user}!</span>
         </div>
         <div className="fixed top-[35%] ml-[20%] text-white text-bold text-lg mt-5">
           <p>

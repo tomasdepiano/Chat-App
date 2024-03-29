@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { User } from "../models/index.js";
-
+import bcrypt from "bcrypt";
 const userSettingsRouter = Router();
 
 userSettingsRouter.put("/editEmail", async (req, res) => {
@@ -40,11 +40,13 @@ userSettingsRouter.put("/editUsername", async (req, res) => {
 
 userSettingsRouter.put("/editPassword", async (req, res) => {
   const { password } = req.body;
+  const salt = bcrypt.genSaltSync(10);
+  const hash = await bcrypt.hash(password, salt);
   const userId = req.session.userId || req.body.userId;
 
   const user = await User.update(
     {
-      password: password,
+      password: hash,
     },
     {
       where: {

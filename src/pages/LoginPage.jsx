@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Input from '../components/Input';
 import { useDispatch } from 'react-redux';
+import ParticlesBackground from '../components/ParticlesBackground';
 
 export default function LoginPage() {
   const [showModal, setShowModal, closeModal] = useOpenCloseModal(false);
@@ -79,6 +80,7 @@ export default function LoginPage() {
         </button>
       </div>
       <CreateAccountModal onClose={closeModal} visible={showModal} />
+      <ParticlesBackground />
     </main>
   );
 }
